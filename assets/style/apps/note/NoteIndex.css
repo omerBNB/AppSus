@@ -6,10 +6,12 @@
   margin-block-start: 5px;
   padding: 10px;
 }
+
 button {
   border-radius: 15px;
   border: none;
 }
+
 /**SIDE BAR */
 .main-container .side-bar-conatiner {
   border: 1px solid rgb(69, 208, 59);
@@ -49,32 +51,15 @@ button {
   list-style: none;
   font-size: 1rem;
   padding: 0;
+  columns: 4 120px;
+  column-rule: 2px;
+  column-gap: 2em;
 }
-.main-container .notes-conatiner ul li {
-  /* padding: 10px; */
-  display: grid;
-  justify-items: center;
-  /* align-content: center; */
-  grid-template-columns: 10% 20% 60% 10%;
+
+.main-container .notes-conatiner ul .note {
+  height: 10vh;
+  width: 100%;
+  border-radius: 15px;
   border: 1px solid rgb(205, 201, 245);
-}
-
-.main-container .notes-conatiner ul li div {
-  border: 1px solid rgb(85, 176, 159);
-  display: flex;
-  align-items: center;
-}
-
-.main-container .notes-conatiner ul li div > * {
-  margin: 0;
-}
-
-.main-container .notes-conatiner ul li .content {
-  /* width: 100%; */
-  justify-self: left;
-}
-
-.main-container .notes-conatiner ul li .sender {
-  /* width: 100%; */
-  justify-self: left;
+  break-inside: avoid;
 }

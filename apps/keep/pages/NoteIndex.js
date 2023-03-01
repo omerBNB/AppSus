@@ -1,5 +1,5 @@
 export default {
-  template: `
+    template: `
     <!-- <header> -->
       <section class="main-container">
           <section class="side-bar-conatiner">
@@ -19,67 +19,22 @@ export default {
               
               <input class="takeANote" type="text" placeholder="Take a Note..."/>
   
-            <section class="notes-list">
-                <ul >
-                    <li>
-                      <div class="1">
-                          <input type="checkbox"/>
-                          <input type="checkbox"/>
-                          <input type="checkbox"/>
-                      </div>
-  
-                      <div class="sender">
-                          <h4>dudufaruk</h4>
-                      </div>
-                      
-                      <div class="content">
-                      <h4>kakaka , she she lulu - </h4>
-                      <p> blalalalalaala lalalallgfgfgf gfgfganhdkjdhk jshdsjkhdhgos dgjslhjlavfbnl ksdjnlafhnlafsds fjsdfjsdfhjsdhbgjsngj afhnjafhjaghaga</p>
-                      </div>
-  
-                      <div>
-                          <h5>Date</h5>
-                      </div>
+            <section class="notes-container">
+                <ul>
+                    <li class="note">
+                      hi ani note
                     </li>
-                    <li>
-                      <div class="1">
-                          <input type="checkbox"/>
-                          <input type="checkbox"/>
-                          <input type="checkbox"/>
-                      </div>
-  
-                      <div class="sender">
-                          <h4>dudufaruk</h4>
-                      </div>
-                      
-                      <div class="content">
-                      <h4>kakaka , she she lulu - </h4>
-                      <p> blalalalalaalalalalallgfgfgfgfgfganhdkjdhkjshdsjkh</p>
-                      </div>
-  
-                      <div>
-                          <h5>Date</h5>
-                      </div>
+                    <li class="note">
+                      hi ani note
                     </li>
-                    <li>
-                      <div class="1">
-                          <input type="checkbox"/>
-                          <input type="checkbox"/>
-                          <input type="checkbox"/>
-                      </div>
-  
-                      <div class="sender">
-                          <h4>dudufaruk</h4>
-                      </div>
-                      
-                      <div class="content">
-                      <h4>kakaka , she she lulu - </h4>
-                      <p> blalalalalaalalalalallgfgfgfgfgfganhdkjdhkjshdsjkh</p>
-                      </div>
-  
-                      <div>
-                          <h5>Date</h5>
-                      </div>
+                    <li class="note">
+                      hi ani note
+                    </li>
+                    <li class="note">
+                      hi ani note
+                    </li>
+                    <li class="note">
+                      hi ani note
                     </li>
                   </ul>
               </section>
