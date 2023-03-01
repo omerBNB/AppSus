@@ -2,12 +2,12 @@ export default {
     template:`
     <section class="side-bar-conatiner">
             <ul>
-                <button>Compose</button>
+                <button @click="sentCreate">Compose</button>
                 <li @click="onInbox">Inbox</li>
                 <li @click="onlyStared">Starred</li>
                 <li>Snoozed</li>
                 <li>Important</li>
-                <li>Sent</li>
+                <li @click="onlySentMails">Sent</li>
            </ul>
 </section>
     `,
@@ -17,6 +17,12 @@ export default {
         },
         onlyStared(){
             this.$emit('showStared')
+        },
+        sentCreate(){
+            this.$emit('createEmail')
+        },
+        onlySentMails(){
+            this.$emit('showSent')
         }
     }
 }

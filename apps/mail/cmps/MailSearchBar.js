@@ -10,9 +10,11 @@ export default {
             filtertxt: ''
         }
     },
-    computed: {
-        filterbytxt(){
-            this.$emit('filtertxts',this.filtertxt)
+    methods: {
+        filterbytxt() {
+            this.$emit('filtertxts', this.filtertxt)
+            console.log(' this.filtertxt', this.filtertxt)
+            this.filtertxt = null
         }
     }
 

@@ -1,11 +1,28 @@
 export default {
-    props:['mail'],
-    template:`
+    props: ['mail'],
+    template: `
     <section>
-        <h1>{{mail.id}}</h1>
+             <div>
+             <input type="checkbox"  @click="toggleisStared" :checked="isStaredChecked"/>
+             <input type="checkbox"/>
+            </div>
+        <div>
+            <h1>{{mail.subject}}</h1>
+            <h2>{{mail.from}}</h2>
+            <p>{{mail.body}}</p>
+        </div>
     </section>
     `,
-    created(){
-        console.log('mail',this.mail)
+    methods: {
+        toggleisStared() {
+            this.mail.isStared = (this.mail.isStared) ? false : true
+            this.$emit('mailStared', this.mail)
+        },
+    },
+    computed: {
+        isStaredChecked() {
+            return (this.mail.isStared) ? true : false
+        }
     }
+
 }

@@ -55,26 +55,44 @@ export const Mailservice = {
     get,
     remove,
     save,
+    createMail,
+    getSentMails
 
 }
 
 function query(filterBy = {}) {
     return storageService.query(MAILS_KEY)
         .then(Mails => {
-            console.log('Mails',Mails)
+            let onlyUserMails = Mails.filter(mail =>  mail.from !== 'user@appsus.com')
             if (filterBy.txt) {
                 const regex = new RegExp(filterBy.txt, 'i')
-                return Mails.filter(mail => regex.test(mail.body))
+                return onlyUserMails.filter(mail => regex.test(mail.body))
             }
             if(filterBy.isStared){
-                return Mails.filter(mail => mail.isStared)
+                return onlyUserMails.filter(mail => mail.isStared)
             }
             else{
-                return Mails
+                return onlyUserMails
             }
     })
 }
 
+function getSentMails(filterBy = {}){
+    return storageService.query(MAILS_KEY)
+        .then(Mails => {
+            let onlySentMails = Mails.filter(mail =>  mail.from === 'user@appsus.com')
+            if (filterBy.txt) {
+                const regex = new RegExp(filterBy.txt, 'i')
+                return onlySentMails.filter(mail => regex.test(mail.body))
+            }
+            if(filterBy.isStared){
+                return onlySentMails.filter(mail => mail.isStared)
+            }
+            else{
+                return onlySentMails
+            }
+    })
+}
 
 function get(MailId) {
     return storageService.get(MAILS_KEY, MailId)
@@ -93,7 +111,7 @@ function save(Mail) {
     }
 }
 
-function getEmptyMail(title = '', listPrice = 0) {
+function getEmptyMail() {
     return { id: '', title, listPrice }
 }
 
@@ -105,10 +123,21 @@ function _createMails() {
     }
 }
 
-function _createMail(title, listPrice = 250) {
-    const Mail = getEmptyMail(title, listPrice)
-    Mail.id = utilService.makeId()
-    return Mail
+function createMail(to,subject,body) {
+    const Mail = {
+        id: null,
+        subject,
+        body,
+        isRead: false,
+        isSelected:false,
+        isStared:false,
+        isImportant:false,
+        sentAt : Date.now(),
+        removedAt : null,
+        from: loggedinUser.email,
+        to,
+    }
+    return save(Mail)
 }
 
 function addReview(MailId, review) {

@@ -20,7 +20,7 @@ export default {
                             <button @click="toggleReadUnread(mail)">📩</button>
                             <button @click="deleteMail(mail.id)">X</button>
                         </span>
-                        <RouterLink :to="'/mail/'+mail.id">Details</RouterLink>
+                        <!-- <RouterLink :to="'/mail/'+mail.id">Details</RouterLink> -->
                     </li>
                     <!-- <RouterLink :to="'/mail/'+mail.id">Details</RouterLink> |
                     <RouterLink :to="'/mail/edit/'+mail.id">Edit</RouterLink> |
@@ -36,8 +36,7 @@ export default {
     },
     methods:{
         showDetails(currMailid){
-            Mailservice.get(currMailid)
-            .then(mail => this.mail = mail)
+            this.$emit('showTheDetails',currMailid)
         },
         deleteMail(currMailid){
             Mailservice.remove(currMailid)
@@ -49,14 +48,15 @@ export default {
         },
         toggleReadUnread(mail){
             mail.isRead = (mail.isRead)? false : true
+            Mailservice.save(mail)
         },
         saveAsSelected(mail){
             Mailservice.save(mail)
-                       .then(mail => this.mail = mail)
+                       
         },
         mailStared(mail){
             Mailservice.save(mail)
-                       .then(mail => this.mail = mail)
+                       
         }
     },
     components: {
