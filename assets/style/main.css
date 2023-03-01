@@ -13,6 +13,8 @@
 @import 'cmps/AppHeader.css';
 @import 'cmps/UserMsg.css';
 
-/* Apps */
+/** Email App */
 @import 'apps/mail/EmailIndex.css';
+
+/* Note App */
 @import 'apps/note/NoteIndex.css';
