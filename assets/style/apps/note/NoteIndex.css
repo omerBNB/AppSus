@@ -14,7 +14,8 @@ button {
 
 /**SIDE BAR */
 .main-container .side-bar-conatiner {
-  border: 1px solid rgb(69, 208, 59);
+  border: none;
+  background-color: rgb(229, 217, 201);
   width: 12.5%;
   border-radius: 15px;
 }
@@ -27,17 +28,26 @@ button {
 }
 
 .main-container .side-bar-conatiner ul li {
-  border: 1px solid rgb(69, 208, 59);
+  padding: 5px;
+  /* background-color: rgb(219, 229, 201); */
+  border: none;
   text-align: left;
   width: 100%;
   border-radius: 15px;
   padding: 5px;
   margin-block-start: 1.5vh;
+  transition: 0.3s;
 }
 
-/**MAILS */
+.main-container .side-bar-conatiner ul li:hover {
+  background-color: rgb(219, 229, 201);
+  scale: 1.1;
+}
+
+/**Notes */
 .main-container .notes-conatiner {
-  border: 1px solid rgb(101, 93, 168);
+  /* border: 1px solid rgb(101, 93, 168); */
+  background-color: rgb(255, 249, 241);
   width: 85%;
   border-radius: 15px;
   padding: 5px;
@@ -51,7 +61,7 @@ button {
   list-style: none;
   font-size: 1rem;
   padding: 0;
-  columns: 4 120px;
+  columns: 4 115px;
   column-rule: 2px;
   column-gap: 2em;
 }
@@ -60,7 +70,7 @@ button {
   text-align: center;
   width: 20vw;
   border-radius: 15px;
-  border: 1px solid rgb(205, 201, 245);
+  border: 1px solid rgb(0, 0, 0);
   break-inside: avoid;
   padding: 5px;
 }
@@ -72,4 +82,36 @@ button {
 .notes-conatiner ul .note img {
   border-radius: 15px;
   width: 100%;
+}
+
+/** addnote-container */
+.addnote-container {
+  display: flex;
+  padding: 3px;
+  border: 1px solid black;
+  border-radius: 10px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.addnote-container input {
+  padding: 7px;
+  border: none;
+  width: 70%;
+  border-radius: 10px;
+}
+
+.addnote-container div {
+  display: flex;
+  justify-content: space-around;
+  width: 25%;
+}
+
+.addnote-container div button {
+  width: 30px;
+  transition: 0.3s;
+}
+
+.addnote-container div button:hover {
+  scale: 1.2;
 }

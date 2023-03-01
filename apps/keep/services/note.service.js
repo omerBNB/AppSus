@@ -1,15 +1,19 @@
 'use strict'
 
-// import { utilService } from './util.service.js'
-// import { storageService } from './async-storage.service.js'
+import { utilService } from '../../../services/util.service.js'
+import { storageService } from '../../../services/async-storage.service.js'
 
 const NOTES_KEY = 'notesDB'
 
 export const noteService = {
   query,
+  get,
+  remove,
+  save,
+  getEmptyNote,
 }
 
-const notes = [
+const starterNotes = [
   {
     id: 'n101',
     createdAt: 1112222,
@@ -48,20 +52,19 @@ const notes = [
     },
   },
 ]
-
-// _createCars()
+_createNotes()
 
 function query() {
-  //   return storageService.query(CAR_KEY).then((cars) => {
-  //     if (filterBy.txt) {
-  //       const regex = new RegExp(filterBy.txt, 'i')
-  //       cars = cars.filter((car) => regex.test(car.vendor))
-  //     }
-  //     if (filterBy.minSpeed) {
-  //       cars = cars.filter((car) => car.maxSpeed >= filterBy.minSpeed)
-  //     }
-  return notes
-  //   })
+  return storageService.query(NOTES_KEY).then((notes) => {
+    //     if (filterBy.txt) {
+    //       const regex = new RegExp(filterBy.txt, 'i')
+    //       cars = cars.filter((car) => regex.test(car.vendor))
+    //     }
+    //     if (filterBy.minSpeed) {
+    //       cars = cars.filter((car) => car.maxSpeed >= filterBy.minSpeed)
+    //     }
+    return notes
+  })
 }
 
 function get(noteId) {
@@ -84,23 +87,32 @@ function save(note) {
 // function getEmptyNote(vendor = '', maxSpeed = 0) {
 
 function getEmptyNote() {
-  return { id: '' }
+  return {
+    id: '',
+    createdAt: Date.now(),
+    type: '',
+    isPinned: false,
+    style: {
+      backgroundColor: '#00d',
+    },
+    info: {
+      txt: '',
+    },
+  }
 }
 
 function _createNotes() {
   let notes = utilService.loadFromStorage(NOTES_KEY)
   if (!notes || !notes.length) {
-    notes = []
-    notes.push(_createNote('audu', 300))
-    utilService.saveToStorage(NOTES_KEY, cars)
+    utilService.saveToStorage(NOTES_KEY, starterNotes)
   }
 }
 
-function _createNote(vendor, maxSpeed = 250) {
-  const note = getEmptyNote(vendor, maxSpeed)
-  note.id = utilService.makeId()
-  return note
-}
+// function _createNote(vendor, maxSpeed = 250) {
+//   const note = getEmptyNote(vendor, maxSpeed)
+//   note.id = utilService.makeId()
+//   return note
+// }
 
 // function _setNextPrevNoteId(note) {
 //   return storageService.query(NOTES_KEY).then((cars) => {
