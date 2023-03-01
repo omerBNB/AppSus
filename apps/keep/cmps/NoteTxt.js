@@ -5,5 +5,7 @@ export default {
      
       `,
 
-  created() {},
+  created() {
+    // this.emit$('changeInfo',)
+  },
 }

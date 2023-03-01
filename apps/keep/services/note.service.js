@@ -20,7 +20,7 @@ const starterNotes = [
     type: 'NoteTxt',
     isPinned: true,
     style: {
-      backgroundColor: '#00d',
+      backgroundColor: '#B3E5BE',
     },
     info: {
       txt: 'Fullstack Me Baby!',
@@ -36,15 +36,19 @@ const starterNotes = [
       title: 'Bobi and Me',
     },
     style: {
-      backgroundColor: '#00d',
+      backgroundColor: '#F5FFC9',
     },
   },
   {
     id: 'n103',
     type: 'NoteTodos',
     isPinned: false,
+    style: {
+      backgroundColor: '#9DC08B',
+    },
     info: {
       title: 'Get my stuff together',
+
       todos: [
         { txt: 'Driving license', doneAt: null },
         { txt: 'Coding power', doneAt: 187111111 },
@@ -93,7 +97,7 @@ function getEmptyNote() {
     type: '',
     isPinned: false,
     style: {
-      backgroundColor: '#00d',
+      backgroundColor: '',
     },
     info: {
       txt: '',

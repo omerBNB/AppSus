@@ -1,10 +1,13 @@
 import { noteService } from '../services/note.service.js'
 import NoteList from '../cmps/NoteList.js'
+import NoteDetails from '../cmps/NoteDetails.js'
+
+import { showErrorMsg, showSuccessMsg } from '../../../services/event-bus.service.js'
 
 export default {
   template: `
-      <section class="main-container"> <!--  -->
-          <section class="side-bar-conatiner"> <!--  -->
+      <section class="main-container"> 
+          <section class="side-bar-conatiner"> 
               <ul>
                   <li>Notes</li>
                   <li>Reminders</li>
@@ -12,7 +15,7 @@ export default {
                   <li>Archive</li>
                   <li>Bin</li>
              </ul>
-          </section> <!--  -->
+          </section>
 
 
           <section class="notes-conatiner">
@@ -27,14 +30,23 @@ export default {
                         <button type="button" @click="changeInput('img')" >🖼</button>
                         <button type="button" @click="changeInput('video')" >📽</button>
                         <button type="submit" >+</button>
-                      </div><!--  -->
+                      </div>
                       </form>
 
                       <section>
-              <NoteList :notes="notes"/>
+              <NoteList 
+              @removeNote="removeNote"
+              @openDetails="openDetails"
+              :notes="notes"/>
   
                </section>
                </section>
+
+               <NoteDetails
+               :selectedNote="selectedNote"
+               @closeModal='selectedNote = null'
+               v-if="selectedNote"/>
+               
      </section> 
       `,
 
@@ -42,8 +54,9 @@ export default {
     return {
       note: noteService.getEmptyNote(),
       userTxt: '',
-      notes: [],
+      notes: null,
       currInputType: 'NoteTxt',
+      selectedNote: null,
     }
   },
 
@@ -51,6 +64,25 @@ export default {
     changeInput(val) {
       this.currInputType = val
     },
+
+    openDetails(note) {
+      this.selectedNote = note
+      this.$router.push('/keep/' + note.id)
+    },
+
+    removeNote(noteId) {
+      noteService
+        .remove(noteId)
+        .then(() => {
+          const idx = this.notes.findIndex((note) => note.id === noteId)
+          this.notes.splice(idx, 1)
+          showSuccessMsg('Note removed')
+        })
+        .catch((err) => {
+          showErrorMsg('Note remove failed')
+        })
+    },
+
     uploadNote() {
       console.log('upload Note', this.userTxt)
       if (this.userTxt === '') return
@@ -60,29 +92,27 @@ export default {
     addTxtNote(txt, type) {
       this.note.info.txt = txt
       this.note.type = type
-      noteService.save(this.note).then(() => {
-        this.notes.push(this.note)
-        this.note = noteService.getEmptyNote()
-        // showSuccessMsg('Car saved')
-        // this.$router.push('/car')
-      })
-      // .catch(err=>{
-      // showErrorMsg('Car save failed')
-      // })
+      this.note.style.backgroundColor = '#B3E5BE'
+      noteService
+        .save(this.note)
+        .then(() => {
+          this.notes.push(this.note)
+          this.note = noteService.getEmptyNote()
+          showSuccessMsg('Note saved')
+          // this.$router.push('/keep' + this.note.id)
+        })
+        .catch((err) => {
+          showErrorMsg('Note save failed')
+        })
     },
   },
 
   created() {
     noteService.query().then((notes) => (this.notes = notes))
   },
-  // watch: {
-  //   sssnote: {
-  //     handler() {
-  //       this.note = noteService.getEmptyNote()
-  //     },
-  //   },
-  // },
+
   components: {
     NoteList,
+    NoteDetails,
   },
 }
