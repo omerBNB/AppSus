@@ -1,5 +1,5 @@
 export default {
-    template: `
+  template: `
     <!-- <header> -->
       <section class="main-container">
           <section class="side-bar-conatiner">
@@ -12,21 +12,14 @@ export default {
              </ul>
           </section>
           
-          <section class="mails-conatiner">
+          <section class="notes-conatiner">
               <div class="search-container">
                   <button>🔍</button>
-                  <input type="search" placeholder="Search Mail..." /></div>
+                  <input type="search" placeholder="Search Keep..." /></div>
               
-              <nav class="nav-bar">
-                  <input type="checkbox"/>
-                  <!-- Todo  select bar -->
-                  <button>Refresh</button>
-                  <!-- <button>Mark all</button> -->
-                  <button><</button>
-                  <button>></button>
-              </nav>
+              <input class="takeANote" type="text" placeholder="Take a Note..."/>
   
-            <section class="mail-list">
+            <section class="notes-list">
                 <ul >
                     <li>
                       <div class="1">
@@ -96,5 +89,4 @@ export default {
           </section>
      </section>
       `,
-  }
-  
+}

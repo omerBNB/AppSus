@@ -1,81 +1,80 @@
 .main-container {
-    display: flex;
-    /* border: 1px solid black; */
-    height: 82vh;
-    /** just for us */
-    margin-block-start: 5px;
-    padding: 10px;
-  }
-  button{
-    border-radius: 15px;
-    border: none;
-  }
-  /**SIDE BAR */
-  .main-container .side-bar-conatiner {
-    border: 1px solid rgb(69, 208, 59);
-    width: 12.5%;
-    border-radius: 15px;
-  }
-  
-  .main-container .side-bar-conatiner ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    padding: 5px;
-  }
-  
-  .main-container .side-bar-conatiner ul li {
-    border: 1px solid rgb(69, 208, 59);
-    text-align: left;
-    width: 100%;
-    border-radius: 15px;
-    padding: 5px;
-    margin-block-start: 1.5vh;
-  }
-  
-  /**MAILS */
-  .main-container .mails-conatiner {
-    border: 1px solid rgb(101, 93, 168);
-    width: 85%;
-    border-radius: 15px;
-    padding: 5px;
-  }
-  
-  .main-container .mails-conatiner .nav-bar {
-    border: 1px solid rgb(101, 93, 168);
-  }
-  
-  .main-container .mails-conatiner ul {
-    list-style: none;
-    font-size: 1rem;
-    padding: 0;
-  }
-  .main-container .mails-conatiner ul li {
-    /* padding: 10px; */
-    display: grid;
-    justify-items: center;
-    /* align-content: center; */
-    grid-template-columns: 10% 20% 60% 10%;
-    border: 1px solid rgb(205, 201, 245);
-  }
-  
-  .main-container .mails-conatiner ul li div {
-    border: 1px solid rgb(85, 176, 159);
-    display: flex;
-    align-items: center;
-  }
-  
-  .main-container .mails-conatiner ul li div > * {
-    margin: 0;
-  }
-  
-  .main-container .mails-conatiner ul li .content {
-    /* width: 100%; */
-    justify-self: left;
-  }
-  
-  .main-container .mails-conatiner ul li .sender {
-    /* width: 100%; */
-    justify-self: left;
-  }
-  
+  display: flex;
+  /* border: 1px solid black; */
+  height: 82vh;
+  /** just for us */
+  margin-block-start: 5px;
+  padding: 10px;
+}
+button {
+  border-radius: 15px;
+  border: none;
+}
+/**SIDE BAR */
+.main-container .side-bar-conatiner {
+  border: 1px solid rgb(69, 208, 59);
+  width: 12.5%;
+  border-radius: 15px;
+}
+
+.main-container .side-bar-conatiner ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  padding: 5px;
+}
+
+.main-container .side-bar-conatiner ul li {
+  border: 1px solid rgb(69, 208, 59);
+  text-align: left;
+  width: 100%;
+  border-radius: 15px;
+  padding: 5px;
+  margin-block-start: 1.5vh;
+}
+
+/**MAILS */
+.main-container .notes-conatiner {
+  border: 1px solid rgb(101, 93, 168);
+  width: 85%;
+  border-radius: 15px;
+  padding: 5px;
+}
+
+.main-container .notes-conatiner .nav-bar {
+  border: 1px solid rgb(101, 93, 168);
+}
+
+.main-container .notes-conatiner ul {
+  list-style: none;
+  font-size: 1rem;
+  padding: 0;
+}
+.main-container .notes-conatiner ul li {
+  /* padding: 10px; */
+  display: grid;
+  justify-items: center;
+  /* align-content: center; */
+  grid-template-columns: 10% 20% 60% 10%;
+  border: 1px solid rgb(205, 201, 245);
+}
+
+.main-container .notes-conatiner ul li div {
+  border: 1px solid rgb(85, 176, 159);
+  display: flex;
+  align-items: center;
+}
+
+.main-container .notes-conatiner ul li div > * {
+  margin: 0;
+}
+
+.main-container .notes-conatiner ul li .content {
+  /* width: 100%; */
+  justify-self: left;
+}
+
+.main-container .notes-conatiner ul li .sender {
+  /* width: 100%; */
+  justify-self: left;
+}
