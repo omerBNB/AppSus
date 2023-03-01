@@ -3,6 +3,9 @@ import { Mailservice } from "../services/mail.service.js"
 import MailsSideBar from '../../mail/cmps/MailSideBar.js'
 import MailsNavBar from '../../mail/cmps/MailNavBar.js'
 import MailsSearchBar from '../../mail/cmps/MailSearchBar.js'
+import CreateEmail from '../../mail/cmps/CreateEmail.js'
+import MailDetails from '../pages/MailDetails.js'
+import { showSuccessMsg } from '../../../services/event-bus.service.js'
 
 export default {
     template: `
@@ -12,51 +15,95 @@ export default {
         <MailsSideBar
         @showallInbox="showAllMails"
         @showStared="showOnlyStared"
+        @createEmail="createAnEmail"
+        @showSent="showSentEmails"
         />
         <section class="mails-conatiner">
             <MailsSearchBar 
             @filtertxts="setFilterBytxt"/>
            <MailsNavBar/>
-     <MailList :mails="mails"/>
-     </section>
-        </section>
-  </section>
+     <MailList 
+     :mails="getMails"
+     @showTheDetails="showDetails"
+     v-if="details===false"/>
+     <MailDetails v-if="mail" :mail="mail"/>
+    </section>
+</section>
+</section>
+  <CreateEmail
+  v-if="creation === 'compose'"
+  @closeTheCompose="closeCreation"
+  @sendEmail="sendNewEmail"/>
     `,
     data() {
         return {
             mails: [],
-            filterBy: {txt:'', isStared:false},
+            filterBy: { txt: '', isStared: false },
+            creation: null,
+            details: false,
+            mail: null
         }
     },
     created() {
         Mailservice.query(this.filterBy)
-        .then(eMails => this.mails = eMails)     
+            .then(eMails => this.mails = eMails)
     },
-    methods:{
+    methods: {
         setFilterBytxt(filterBy) {
             this.filterBy.txt = filterBy
         },
-        showAllMails(){
-            this.filterBy = {txt:'', isStared:false}
+        showAllMails() {
+            this.details = false
+            this.mail = null
+            this.filterBy = { txt: '', isStared: false }
             Mailservice.query(this.filterBy)
-            .then(eMails => this.mails = eMails) 
+                .then(eMails => this.mails = eMails)
         },
-        showOnlyStared(){
+        showOnlyStared() {
+            this.details = false
+            this.mail = null
             this.filterBy.isStared = true
             Mailservice.query(this.filterBy)
-            .then(eMails => this.mails = eMails)
+                .then(eMails => this.mails = eMails)
         },
+        closeCreation() {
+            this.creation = null
+        },
+        createAnEmail() {
+            this.creation = 'compose'
+        },
+        showDetails(currMailid) {
+            this.details = true
+            Mailservice.get(currMailid)
+                .then(mail => this.mail = mail)
+        },
+        sendNewEmail(content) {
+            this.creation = null
+            const { to, subject, body } = content
+            Mailservice.createMail(to, subject, body)
+                       .then(()=>
+                       showSuccessMsg('mail sent'))   
+        },
+        showSentEmails(){
+            Mailservice.getSentMails()
+                     .then(mails => this.mails = mails)
+        }
     },
-    computed:{
-        getFilterByTxt(){
+    computed: {
+        getFilterByTxt() {
             const regex = new RegExp(this.filterBy.txt, 'i')
             return this.mails.filter(mail => regex.test(mail.body))
+        },
+        getMails() {
+            return this.mails
         }
     },
     components: {
         MailList,
         MailsSideBar,
         MailsNavBar,
-        MailsSearchBar
+        MailsSearchBar,
+        CreateEmail,
+        MailDetails
     }
 }
