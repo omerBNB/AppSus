@@ -9,6 +9,9 @@ const emails = [{
     subject: 'Miss you!',
     body: 'Would love to catch up sometimes and maybe hang out',
     isRead: false,
+    isSelected:false,
+    isStared:false,
+    isImportant:false,
     sentAt : 1551133930594,
     removedAt : null,
     from: 'momo@momo.com',
@@ -19,6 +22,9 @@ const emails = [{
     subject: 'fsaafasfasf!',
     body: 'hi i am ido and i love alpakas, i also like to eat them',
     isRead: false,
+    isSelected:false,
+    isStared:false,
+    isImportant:false,
     sentAt : 1551133930594,
     removedAt : null,
     from: 'ido@momo.com',
@@ -29,6 +35,9 @@ const emails = [{
     subject: 'scbvsvs!',
     body: 'hi i am omer and i love shawarma',
     isRead: false,
+    isSelected:false,
+    isStared:false,
+    isImportant:false,
     sentAt : 1551133930594,
     removedAt : null,
     from: 'omer@momo.com',
@@ -56,7 +65,11 @@ function query(filterBy = {}) {
             if (filterBy.txt) {
                 const regex = new RegExp(filterBy.txt, 'i')
                 return Mails.filter(mail => regex.test(mail.body))
-            }else{
+            }
+            if(filterBy.isStared){
+                return Mails.filter(mail => mail.isStared)
+            }
+            else{
                 return Mails
             }
     })

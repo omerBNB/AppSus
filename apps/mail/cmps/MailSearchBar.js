@@ -1,9 +1,9 @@
 export default {
     template: `
-<div class="search-container">
+<form class="search-container" @submit.prevent="filterbytxt">
     <input type="search" placeholder="Search Mail..." v-model="filtertxt"/>
-    <button @click="filterbytxt">🔍</button>
-    </div>
+    <button>🔍</button>
+    </form>
 `,
     data() {
         return {

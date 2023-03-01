@@ -67,21 +67,35 @@ button {
 .main-container .mails-conatiner .unread {
   background-color: #f7f5f5;
 }
+.main-container .mails-conatiner .read {
+  background-color: #ffffff;
+}
 
-.main-container .mails-conatiner ul button {
+/* .main-container .mails-conatiner ul div button{
+  cursor: pointer;
+} */
+  
+/* } */
+.main-container .mails-conatiner ul span {
   position: absolute;
   font-size: 0.7rem;
   left: 80%;
-  top: 30.5%;
+  margin-block-end: 25px;
   align-self: center;
   cursor: pointer;
-  /* justify-self: right; */
+  justify-self: right;
 }
 
 .main-container .mails-conatiner ul li section div {
   /* border: 1px solid rgb(85, 176, 159); */
   display: flex;
   align-items: center;
+}
+.main-container .mails-conatiner ul li section div input{
+  /* border: 1px solid rgb(85, 176, 159); */
+  /* display: flex; */
+  /* align-items: center; */
+  cursor: pointer;
 }
 
 .main-container .mails-conatiner ul li section div>* {

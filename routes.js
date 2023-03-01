@@ -20,6 +20,12 @@ const routerOptions = {
     {
       path: '/mail',
       component: MailIndex,
+      children: [
+        {
+            path: ':mailId',
+            component: MailDetails
+        },
+      ]
     },
     {
       path: '/keep',
