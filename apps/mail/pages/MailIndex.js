@@ -9,11 +9,13 @@ export default {
   <!-- <header> -->
   <section class="mails-list">
   <section class="main-container">
-        <MailsSideBar/>
+        <MailsSideBar
+        @showallInbox="showAllMails"
+        @showStared="showOnlyStared"
+        />
         <section class="mails-conatiner">
-            <MailsSearchBar
-            @filtertxts="setFilterBytxt"
-            />
+            <MailsSearchBar 
+            @filtertxts="setFilterBytxt"/>
            <MailsNavBar/>
      <MailList :mails="mails"/>
      </section>
@@ -23,7 +25,7 @@ export default {
     data() {
         return {
             mails: [],
-            filterBy: {txt:''},
+            filterBy: {txt:'', isStared:false},
         }
     },
     created() {
@@ -33,7 +35,17 @@ export default {
     methods:{
         setFilterBytxt(filterBy) {
             this.filterBy.txt = filterBy
-        }
+        },
+        showAllMails(){
+            this.filterBy = {txt:'', isStared:false}
+            Mailservice.query(this.filterBy)
+            .then(eMails => this.mails = eMails) 
+        },
+        showOnlyStared(){
+            this.filterBy.isStared = true
+            Mailservice.query(this.filterBy)
+            .then(eMails => this.mails = eMails)
+        },
     },
     computed:{
         getFilterByTxt(){
