@@ -17,4 +17,8 @@
 @import 'apps/mail/EmailIndex.css';
 
 /* Note App */
+/* Pages */
 @import 'apps/note/NoteIndex.css';
+
+/* CMPS: */
+@import 'apps/note/cmps/NoteTodos.css';

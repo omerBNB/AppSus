@@ -57,9 +57,19 @@ button {
 }
 
 .main-container .notes-conatiner ul .note {
-  height: 10vh;
-  width: 100%;
+  text-align: center;
+  width: 20vw;
   border-radius: 15px;
   border: 1px solid rgb(205, 201, 245);
   break-inside: avoid;
+  padding: 5px;
+}
+
+.notes-conatiner ul .note .title {
+  margin: 0;
+}
+
+.notes-conatiner ul .note img {
+  border-radius: 15px;
+  width: 100%;
 }

@@ -1,6 +1,8 @@
+import { noteService } from '../services/note.service.js'
+import NoteList from '../cmps/NoteList.js'
+
 export default {
-    template: `
-    <!-- <header> -->
+  template: `
       <section class="main-container">
           <section class="side-bar-conatiner">
               <ul>
@@ -11,7 +13,8 @@ export default {
                   <li>Bin</li>
              </ul>
           </section>
-          
+
+
           <section class="notes-conatiner">
               <div class="search-container">
                   <button>🔍</button>
@@ -19,29 +22,30 @@ export default {
               
               <input class="takeANote" type="text" placeholder="Take a Note..."/>
   
-            <section class="notes-container">
-                <ul>
-                    <li class="note">
-                      hi ani note
-                    </li>
-                    <li class="note">
-                      hi ani note
-                    </li>
-                    <li class="note">
-                      hi ani note
-                    </li>
-                    <li class="note">
-                      hi ani note
-                    </li>
-                    <li class="note">
-                      hi ani note
-                    </li>
-                  </ul>
-              </section>
+              <NoteList :notes="notes"/>
   
           </section>
               
-          </section>
      </section>
       `,
+
+  data() {
+    return {
+      notes: [],
+    }
+  },
+
+  created() {
+    // nsoteService.query().then((notes) => {
+    //   this.notes = notes
+    //   console.log('this.notes', this.notes)
+    // })
+    const notesDB = noteService.query()
+    this.notes = notesDB
+    console.log('this.notes:', this.notes)
+  },
+
+  components: {
+    NoteList,
+  },
 }
