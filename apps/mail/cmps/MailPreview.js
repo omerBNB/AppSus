@@ -13,7 +13,7 @@ export default {
                     </div>
                     
                     <div class="content" @click="showDetails(mail.id)">
-                    <h4>{{mail.subject}} -</h4>
+                    <h4>{{displaySubject}} -</h4>
                     <p>{{displayTxt}}</p>
                     <span>
                             <i @click.stop="ReadUnread(mail)" class="fa-regular fa-envelope"></i>
@@ -30,7 +30,8 @@ export default {
     data() {
         return {
             date: this.mail.sentAt,
-            length: 30,
+            length: 25,
+            sublength: 15
         }
     },
     methods: {
@@ -60,6 +61,11 @@ export default {
             if (this.mail.body.length > this.length)
                 return this.mail.body.slice(0, this.length) + '...';
             return this.mail.body;
+        },
+        displaySubject(){
+            if (this.mail.subject.length > this.sublength)
+            return this.mail.subject.slice(0, this.sublength) + '...';
+        return this.mail.subject;
         },
         isSelectedChecked() {
             return (this.mail.isSelected) ? true : false
