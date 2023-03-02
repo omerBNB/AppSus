@@ -15,11 +15,13 @@ export default {
                         @showdetails="showDetails"
                         @mailSelected="saveAsSelected"
                         @mailStared="mailStared"
+                        @readnread="toggleReadUnread(mail)"
+                        @deletemail="deleteMail(mail.id)"
                         />
-                        <span>
-                            <button @click="toggleReadUnread(mail)">📩</button>
-                            <button @click="deleteMail(mail.id)">X</button>
-                        </span>
+                        <!-- <span>
+                            <button @click.stop="toggleReadUnread(mail)">📩</button>
+                            <button @click.stop="deleteMail(mail.id)">X</button>
+                        </span> -->
                         <!-- <RouterLink :to="'/mail/'+mail.id">Details</RouterLink> -->
                     </li>
                     <!-- <RouterLink :to="'/mail/'+mail.id">Details</RouterLink> |

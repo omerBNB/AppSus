@@ -4,92 +4,131 @@ import { utilService } from "../../../services/util.service.js"
 import { storageService } from '../../../services/async-storage.service.js'
 
 const MAILS_KEY = 'Mails'
-const TRASH_MAILS ='TrashMail'
+const TRASH_MAILS = 'TrashMail'
 
 const emails = [{
     id: 'e101',
-    subject: 'Miss you!',
-    body: 'SCAM - hi, i have a lot of money because i am a price - can you give me your bank account for transfer?',
+    subject: 'I HAVE SOME MONEY TO GIVE YOU!!!',
+    body: ' SCAM - hi, i have a lot of money because i am a price - can you give me your bank account for transfer?',
     isRead: false,
-    isSelected:false,
-    isStared:false,
-    isImportant:false,
-    sentAt : 1551133930594,
-    removedAt : null,
+    isSelected: false,
+    isStared: false,
+    isImportant: false,
+    sentAt: 1551133930594,
+    removedAt: null,
     from: 'nigerianprince@lies.com',
     to: 'user@appsus.com'
-    },
-    {
+},
+{
     id: 'e102',
     subject: 'fsaafasfasf!',
-    body: 'hi i am ido and i love alpakas, i also like to eat them',
+    body: ' hi i am ido and i love alpakas, i also like to eat them',
     isRead: false,
-    isSelected:false,
-    isStared:false,
-    isImportant:false,
-    sentAt : 1551133930594,
-    removedAt : null,
+    isSelected: false,
+    isStared: false,
+    isImportant: false,
+    sentAt: 1551133930594,
+    removedAt: null,
     from: 'ido@momo.com',
     to: 'user@appsus.com'
-    },
-    {
+},
+{
     id: 'e103',
     subject: 'scbvsvs!',
-    body: 'hi i am omer and i love shawarma',
+    body: ' hi i am omer and i love shawarma',
     isRead: false,
-    isSelected:false,
-    isStared:false,
-    isImportant:false,
-    sentAt : 1551133930594,
-    removedAt : null,
+    isSelected: false,
+    isStared: false,
+    isImportant: false,
+    sentAt: 1551133930594,
+    removedAt: null,
     from: 'omer@momo.com',
     to: 'user@appsus.com'
-    },
-    {
-        id: 'e104',
-        subject: 'yeaaaaaaaaa!',
-        body: 'love to sing la la lal al la lal al la lala lal al lal ala ',
-        isRead: false,
-        isSelected:false,
-        isStared:false,
-        isImportant:false,
-        sentAt : 1551133930594,
-        removedAt : null,
-        from: 'dodayaron@momo.com',
-        to: 'user@appsus.com'
-        },
-        {
-        id: 'e105',
-        subject: 'wohhwwwoaww!',
-        body: 'hello there whats upppppppp',
-        isRead: false,
-        isSelected:false,
-        isStared:false,
-        isImportant:false,
-        sentAt : 1551133930594,
-        removedAt : null,
-        from: 'rochama@momo.com',
-        to: 'user@appsus.com'
-        },
-        {
-        id: 'e106',
-        subject: 'SSJ3!',
-        body: 'hi i am goku would you like me to teach you POWER?!',
-        isRead: false,
-        isSelected:false,
-        isStared:false,
-        isImportant:false,
-        sentAt : 1551133930594,
-        removedAt : null,
-        from: 'goku@momo.com',
-        to: 'user@appsus.com'
-        }
+},
+{
+    id: 'e104',
+    subject: 'yeaaaaaaaaa!',
+    body: ' love to sing la la lal al la lal al la lala lal al lal ala ',
+    isRead: false,
+    isSelected: false,
+    isStared: false,
+    isImportant: false,
+    sentAt: 1551133930594,
+    removedAt: null,
+    from: 'dodayaron@momo.com',
+    to: 'user@appsus.com'
+},
+{
+    id: 'e105',
+    subject: 'wohhwwwoaww!',
+    body: ' hello there whats upppppppp',
+    isRead: false,
+    isSelected: false,
+    isStared: false,
+    isImportant: false,
+    sentAt: 1551133930594,
+    removedAt: null,
+    from: 'rochama@momo.com',
+    to: 'user@appsus.com'
+},
+{
+    id: 'e106',
+    subject: 'SSJ3!',
+    body: ' hi i am goku, would you like me to teach you what is POWER?!',
+    isRead: false,
+    isSelected: false,
+    isStared: false,
+    isImportant: false,
+    sentAt: 1551133930594,
+    removedAt: null,
+    from: 'goku@momo.com',
+    to: 'user@appsus.com'
+},
+{
+    id: 'e107',
+    subject: 'Job Alert!!',
+    body: ' This is Google, want to work with Us? 🥳',
+    isRead: false,
+    isSelected: false,
+    isStared: false,
+    isImportant: false,
+    sentAt: 1551133930594,
+    removedAt: null,
+    from: 'google@recruit.com',
+    to: 'user@appsus.com'
+},
+{
+    id: 'e107',
+    subject: 'Special Offer!!',
+    body: ' My Name is Yuval Hamebulbal, want to sniff some coca with me?',
+    isRead: false,
+    isSelected: false,
+    isStared: false,
+    isImportant: false,
+    sentAt: 1551133930594,
+    removedAt: null,
+    from: 'yubal@drugs.com',
+    to: 'user@appsus.com'
+},
+{
+    id: 'e108',
+    subject: 'Mr Meseeks!!!',
+    body: ' Hi, I Am Mr Meseeks look at me!!!',
+    isRead: false,
+    isSelected: false,
+    isStared: false,
+    isImportant: false,
+    sentAt: 1551133930594,
+    removedAt: null,
+    from: 'mrmeseeks@morty.com',
+    to: 'user@appsus.com'
+}
 ]
 const loggedinUser = {
-        email: 'user@appsus.com',
-        fullname: 'Mahatma Appsus'
-       }
-       
+    email: 'user@appsus.com',
+    fullname: 'Mahatma Appsus'
+}
+
 _createMails()
 
 export const Mailservice = {
@@ -100,74 +139,80 @@ export const Mailservice = {
     createMail,
     getSentMails,
     saveTrashedMail,
-    queryTrashedMail
+    queryTrashedMail,
+    removeTrashedMail
 
 }
 
 function query(filterBy = {}) {
     return storageService.query(MAILS_KEY)
         .then(Mails => {
-            let onlyUserMails = Mails.filter(mail =>  mail.from !== 'user@appsus.com')
+            let onlyUserMails = Mails.filter(mail => mail.from !== 'user@appsus.com')
             if (filterBy.txt) {
                 const regex = new RegExp(filterBy.txt, 'i')
                 return onlyUserMails.filter(mail => regex.test(mail.body))
             }
-            if(filterBy.isStared){
+            if (filterBy.isStared) {
                 return onlyUserMails.filter(mail => mail.isStared)
             }
-            else{
+            else {
                 return onlyUserMails
             }
-    })
+        })
 }
 
-function queryTrashedMail(filterBy = {}){
+function queryTrashedMail(filterBy = {}) {
     return storageService.query(TRASH_MAILS)
-    .then(Mails => {
-        if (filterBy.txt) {
-            const regex = new RegExp(filterBy.txt, 'i')
-            return Mails.filter(mail => regex.test(mail.body))
-        }
-        if(filterBy.isStared){
-            return Mails.filter(mail => mail.isStared)
-        }
-        else{
-            return Mails
-        }
-})
+        .then(Mails => {
+            if (filterBy.txt) {
+                const regex = new RegExp(filterBy.txt, 'i')
+                return Mails.filter(mail => regex.test(mail.body))
+            }
+            if (filterBy.isStared) {
+                return Mails.filter(mail => mail.isStared)
+            }
+            else {
+                return Mails
+            }
+        })
 }
 
-function getSentMails(filterBy = {}){
+function getSentMails(filterBy = {}) {
     return storageService.query(MAILS_KEY)
         .then(Mails => {
-            let onlySentMails = Mails.filter(mail =>  mail.from === 'user@appsus.com')
+            let onlySentMails = Mails.filter(mail => mail.from === 'user@appsus.com')
             if (filterBy.txt) {
                 const regex = new RegExp(filterBy.txt, 'i')
                 return onlySentMails.filter(mail => regex.test(mail.body))
             }
-            if(filterBy.isStared){
+            if (filterBy.isStared) {
                 return onlySentMails.filter(mail => mail.isStared)
             }
-            else{
+            else {
                 return onlySentMails
             }
-    })
+        })
 }
 
 function get(MailId) {
     return storageService.get(MAILS_KEY, MailId)
-           .then(_setNextPrevMailId)
+        .then(_setNextPrevMailId)
 }
 
 function remove(MailId) {
     return storageService.remove(MAILS_KEY, MailId)
-           
+}
+
+function removeTrashedMail(MailId) {
+    return storageService.remove(TRASH_MAILS, MailId)
 }
 
 function saveTrashedMail(Mail) {
+    Mail.id = null
     if (Mail.id) {
         return storageService.put(TRASH_MAILS, Mail)
     } else {
+        Mail.removedAt = Date.now()
         return storageService.post(TRASH_MAILS, Mail)
     }
 }
@@ -191,17 +236,17 @@ function _createMails() {
     }
 }
 
-function createMail(to,subject,body) {
+function createMail(to, subject, body) {
     const Mail = {
         id: null,
         subject,
         body,
         isRead: false,
-        isSelected:false,
-        isStared:false,
-        isImportant:false,
-        sentAt : Date.now(),
-        removedAt : null,
+        isSelected: false,
+        isStared: false,
+        isImportant: false,
+        sentAt: Date.now(),
+        removedAt: null,
         from: loggedinUser.email,
         to,
     }
@@ -210,26 +255,26 @@ function createMail(to,subject,body) {
 
 function addReview(MailId, review) {
     const newReview = JSON.parse(JSON.stringify(review))
-    return storageService.get(MAILS_KEY,MailId)
+    return storageService.get(MAILS_KEY, MailId)
         .then(Mail => {
             newReview.id = utilService.makeId()
             if (!Mail.newReview) {
-                Mail.newReview = [] 
+                Mail.newReview = []
             }
-                Mail.newReview.push(newReview)
-            
+            Mail.newReview.push(newReview)
+
             return Mail
         })
         .then(Mail => save(Mail))
 }
 
-function deleteReview(reviewId,MailId){
-    return storageService.get(MAILS_KEY,MailId)
-    .then(Mail => {
-       const idx = Mail.newReview.findIndex(review => review.id === reviewId)
-        Mail.newReview.splice(idx,1)
-        return Mail
-    }
+function deleteReview(reviewId, MailId) {
+    return storageService.get(MAILS_KEY, MailId)
+        .then(Mail => {
+            const idx = Mail.newReview.findIndex(review => review.id === reviewId)
+            Mail.newReview.splice(idx, 1)
+            return Mail
+        }
         )
         .then(Mail => save(Mail))
 }

@@ -31,6 +31,7 @@ export default {
      <MailDetails 
      v-if="mail" 
      :mail="mail"
+     @backtoallmails="showAllMails"
      @deleteMail="deleteMail"/>
     </section>
 </section>
@@ -63,6 +64,7 @@ export default {
             this.filterBy = { txt: '', isStared: false }
             Mailservice.query(this.filterBy)
                 .then(eMails => this.mails = eMails)
+                // this.$route.push('/mail')
         },
         showOnlyStared() {
             this.details = false
@@ -87,29 +89,37 @@ export default {
             this.creation = null
             const { to, subject, body } = content
             Mailservice.createMail(to, subject, body)
-                       .then(()=>
-                       showSuccessMsg('mail sent'))   
+                .then(() =>
+                    showSuccessMsg('mail sent'))
         },
-        showSentEmails(){
+        showSentEmails() {
             this.details = false
             this.mail = null
             this.filterBy = { txt: '', isStared: false }
             Mailservice.getSentMails()
-                     .then(mails => this.mails = mails)
+                .then(mails => this.mails = mails)
         },
-        deleteMail(currMailid){
+        deleteMail(currMailid) {
             const mail = this.mails.find(mail => mail.id === currMailid)
-            Mailservice.saveTrashedMail(mail)
-            Mailservice.remove(currMailid)
-            .then(() => {
-                const idx = this.mails.findIndex(mail => mail.id === currMailid)
-                this.mails.splice(idx, 1)
-                showSuccessMsg('mail removed')
-            })  
+            if (mail.removedAt) {
+                Mailservice.removeTrashedMail(mail.id)
+                .then(() => {
+                    const idx = this.mails.findIndex(mail => mail.id === currMailid)
+                    this.mails.splice(idx, 1)})
+                showSuccessMsg('trashsed mail removed')
+            } else {
+                Mailservice.saveTrashedMail(mail)
+                Mailservice.remove(currMailid)
+                    .then(() => {
+                        const idx = this.mails.findIndex(mail => mail.id === currMailid)
+                        this.mails.splice(idx, 1)
+                        showSuccessMsg('mail removed')
+                    })
+            }
         },
-        showTrashMails(){
+        showTrashMails() {
             Mailservice.queryTrashedMail()
-                      .then(mails => this.mails = mails)
+                .then(mails => this.mails = mails)
         }
     },
     computed: {

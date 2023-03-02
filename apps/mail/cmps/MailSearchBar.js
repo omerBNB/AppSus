@@ -2,7 +2,7 @@ export default {
     template: `
 <section class="search-container">
     <form @submit.prevent="filterbytxt" >
-        <button>🔍</button>
+        <button><i class="fa-solid fa-magnifying-glass"></i></button>
         <input type="search" placeholder="Search mail" v-model="filtertxt" />
     </form>
 </section>

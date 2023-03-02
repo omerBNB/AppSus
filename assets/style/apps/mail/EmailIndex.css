@@ -1,4 +1,3 @@
-
 /**MAILS */
 .main-container .mails-conatiner {
   background-color: #FFFFFF;
@@ -53,13 +52,14 @@
 
 /* } */
 .main-container .mails-conatiner ul span {
-  position: absolute;
-  font-size: 0.7rem;
-  left: 75%;
+  /* position: absolute; */
+  font-size: .85rem;
+  /* left: 80%; */
   align-self: center;
   cursor: pointer;
   justify-self: right;
 }
+
 
 .main-container .mails-conatiner ul li section div {
   /* border: 1px solid rgb(85, 176, 159); */
@@ -81,13 +81,30 @@
 .main-container .mails-conatiner ul li section .content {
   /* width: 100%; */
   justify-self: left;
+  margin-inline-start: 10%;
+  /* justify-content: space-between; */
+}
+
+.main-container .mails-conatiner ul li section .content span {
+  display: none;
+  position: absolute;
+  left: 80%;
+}
+.main-container .mails-conatiner ul li:hover section .content span {
+  display: block;
+  position: absolute;
+  left: 80%;
+}
+
+.main-container .mails-conatiner ul li section .content span i{
+  margin-inline-start: 10px;
 }
 
 .main-container .mails-conatiner ul li section .sender {
   /* width: 100%; */
   justify-self: left;
   align-self: center;
-  margin-inline-start: 5%;
+  margin-inline-start: 10%;
 }
 
 .main-container .mails-conatiner ul li section .checkboxes {
@@ -99,4 +116,40 @@
 .main-container .mails-conatiner ul li section .checkboxes input:hover {
   /* background-color: #F2F2F2; */
   transform: scale(1.3);
+}
+
+.star {
+  visibility: hidden;
+  font-size: 1rem;
+  line-height: 12px;
+  cursor: pointer;
+}
+
+.star:before {
+  content: "\2606";
+  visibility: visible;
+  color: black;
+}
+
+.star:checked:before {
+  content: "\2605";
+  color: gold;
+}
+
+.cloud {
+  visibility: hidden;
+  font-size: 1rem;
+  line-height: 12px;
+  cursor: pointer;
+}
+
+.cloud:before {
+  content: "\2601";
+  visibility: visible;
+  color: rgb(226, 226, 226);
+}
+
+.cloud:checked:before {
+  content: "\2601";
+  color: gold;
 }

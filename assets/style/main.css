@@ -20,6 +20,7 @@
 /* cmps */
 @import 'apps/mail/EmailCreate.css';
 @import 'apps/mail/SearchContainer.css';
+@import 'apps/mail/DetailsNav.css';
 /* Note App */
 /* Pages */
 @import 'apps/note/NoteIndex.css';
