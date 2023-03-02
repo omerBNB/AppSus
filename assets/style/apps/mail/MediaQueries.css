@@ -851,11 +851,12 @@
         font-size: .85rem;
         font-family: 'Franklin Gothic', 'Arial Narrow', Arial, sans-serif;
         width: 90%;
+        padding: 10px;
     }
 
     .search-container form button {
         width: 3.2rem;
-        height: 3.9rem;
+        /* height: 3.9rem; */
         background-color: #EAF1FB;
     }
    
