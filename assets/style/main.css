@@ -21,6 +21,10 @@
 @import 'apps/mail/EmailCreate.css';
 @import 'apps/mail/SearchContainer.css';
 @import 'apps/mail/DetailsNav.css';
+
+/* Email MQ */
+@import 'apps/mail/MediaQueries.css';
+
 /* Note App */
 /* Pages */
 @import 'apps/note/NoteIndex.css';
