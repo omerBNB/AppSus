@@ -21,31 +21,37 @@ export default {
           <section class="notes-conatiner">
               <div class="search-container">
                   <button>🔍</button>
-                  <input type="search" placeholder="Search Keep..." /></div>
+                  <input type="search" placeholder="Search Keep..." />
+                </div>
 
                     <form class="addnote-container" @submit.prevent="uploadNote">
                       <input v-model="userTxt" class="takeANote" :type="text" :placeholder="currInputType"/>
+
                       <div>
-                        <button type="button" @click="changeInput('NoteTxt')">A</button>
-                        <button type="button" @click="changeInput('img')" >🖼</button>
-                        <!-- <button><input type="file" @change="onFileSelected" >🖼</input></button> -->
-                        <button type="button" @click="changeInput('video')" >📽</button>
-                        <button type="button" @click="changeInput('todoList')" >📃</button>
+                        <button type="button" @click="changeInputType('NoteTxt')">A</button>
+                        <button type="button" @click="changeInputType('img')" >🖼</button>
+                        <input type="file" ref="fileInput" @change="handleFileChange" style="display: none;">
+                        <!-- <input class="add-img" type="file" @change="onFileSelected" >🖼</input></button> -->
+                        <button type="button" @click="changeInputType('video')" >📽</button>
+                        <button type="button" @click="changeInputType('todoList')" >📃</button>
                         <button type="submit" >+</button>
                       </div>
+
                       </form>
 
                       <section>
               <NoteList 
               @removeNote="removeNote"
               @openDetails="openDetails"
-              :notes="notes"/>
+              :notes="notes"/> 
+              <!-- todo: notes to show in computed (for filter)  -->
   
                <!-- </section> -->
                </section>
 
                <NoteDetails
                :selectedNote="selectedNote"
+               @updateNote='updateNote'
                @closeModal='selectedNote = null'
                @changeTxt='changeTxt'
                @changeBgcColor='changeBgcColor'
@@ -54,38 +60,53 @@ export default {
                v-if="selectedNote"/>
                
      </section> 
+     </section> 
       `,
 
   data() {
     return {
-      note: noteService.getEmptyNote(),
+      note: noteService.getEmptyTxtNote(),
       userTxt: '',
       notes: null,
       currInputType: 'NoteTxt',
       selectedNote: null,
+      selectedImg: null,
     }
   },
 
   methods: {
-    onFileSelected(event) {
-      // console.log(event)
+    chooseFile() {
+      this.$refs.fileInput.click()
     },
 
-    removeTodo(todoIdx) {
-      console.log('todoIdx:', todoIdx)
-      noteService.removeTodo(this.selectedNote, todoIdx).then(() => {
-        // const idx = this.cars.findIndex((car) => car.id === carId)
-        // this.cars.splice(idx, 1)
-        // showSuccessMsg('Car removed')
-      })
-      // .catch((err) => {
-      // showErrorMsg('Car remove failed')
-      // })
+    handleFileChange(event) {
+      console.log('Selected file:', event.target.files[0])
+      this.selectedFile = event.target.files[0]
+      const url = this.imageUrl
+      this.addImgNote(url)
+      console.log('this.note', this.note)
     },
+
+    updateNote(updatedNote) {
+      console.log('updatedNote:', updatedNote)
+      noteService
+        .save(updatedNote)
+        .then(() => {
+          const idx = this.notes.findIndex((note) => note.id === updatedNote.id)
+          this.selectedNote = updatedNote
+          this.notes.splice(idx, 1, updatedNote)
+          console.log('this.notes:', this.notes)
+          showSuccessMsg('Note removed')
+        })
+        .catch((err) => {
+          showErrorMsg('Note remove failed')
+        })
+    },
+
     addTodo(todo) {
-      console.log('hey')
       this.selectedNote.info.todos.push(todo)
     },
+
     changeBgcColor(color) {
       console.log('color:', color)
       this.selectedNote.style.backgroundColor = color
@@ -111,8 +132,14 @@ export default {
         })
     },
 
-    changeInput(val) {
+    changeInputType(val) {
       this.currInputType = val
+      console.log('this.currInputType', this.currInputType)
+      if (this.currInputType === 'NoteTxt') this.note = noteService.getEmptyTxtNote()
+      else if (this.currInputType === 'img') {
+        this.note = noteService.getEmptyImgNote()
+        this.chooseFile()
+      } else if (this.currInputType === 'todoList') this.note = noteService.getEmptyTodoListNote()
     },
 
     openDetails(note) {
@@ -120,29 +147,41 @@ export default {
       // this.$router.push('/keep/' + note.id)
     },
 
-    addTodoList(text, type) {
-      // this.note.info.txt = txt
-      // this.note.todos = []
-      // text.split(',').forEach((todoTxt) => {
-      //   this.note.todos.push({
-      //     id: 'n103',
-      //     info: { title: 'Get my stuff together!' },
-      //     isPinned: false,
-      //     style: { backgroundColor: '#ccdae5' },
-      //     type: 'NoteTodos',
-      // })
-      // })
-      //s noteService
-      //   .save(this.note)
-      //   .then(() => {
-      //     this.notes.push(this.note)
-      //     this.note = noteService.getEmptyNote()
-      //     showSuccessMsg('Note saved')
-      //     // this.$router.push('/keep' + this.note.id)
-      //   })
-      //   .catch((err) => {
-      //     showErrorMsg('Note save failed')
-      //   })
+    addTodoList(text) {
+      text.split(',').forEach((todoTxt, idx) => {
+        // handle first intaration for the title:
+        if (idx === 0) this.note.info.title = todoTxt
+        else this.note.info.todos.push({ txt: todoTxt, doneAt: null })
+      })
+
+      noteService
+        .save(this.note)
+        .then(() => {
+          this.notes.push(this.note)
+          // this.note = noteService.getEmptyNote()
+          showSuccessMsg('Note saved')
+          // this.$router.push('/keep' + this.note.id)
+        })
+        .catch(() => {
+          showErrorMsg('Note save failed')
+        })
+    },
+
+    addImgNote(url) {
+      if (!this.selectedFile) return
+      this.note.info.url = url
+
+      noteService
+        .save(this.note)
+        .then(() => {
+          this.notes.push(this.note)
+          // this.note = noteService.getEmptyNote()
+          showSuccessMsg('Note saved')
+          // this.$router.push('/keep' + this.note.id)
+        })
+        .catch(() => {
+          showErrorMsg('Note save failed')
+        })
     },
 
     removeNote(noteId) {
@@ -163,6 +202,11 @@ export default {
       if (this.userTxt === '') return
       if (this.currInputType === 'NoteTxt') this.addTxtNote(this.userTxt, this.currInputType)
       if (this.currInputType === 'todoList') this.addTodoList(this.userTxt, this.currInputType)
+      if (this.currInputType === 'img') {
+        console.log('heyyy')
+        const imgUrl = this.imageUrl()
+        this.addImgNote(this.userTxt, imgUrl, this.selectedImg)
+      }
     },
 
     addTxtNote(txt, type) {
@@ -173,13 +217,26 @@ export default {
         .save(this.note)
         .then(() => {
           this.notes.push(this.note)
-          this.note = noteService.getEmptyNote()
+          this.note = noteService.getEmptyTxtNote()
           showSuccessMsg('Note saved')
           // this.$router.push('/keep' + this.note.id)
         })
         .catch((err) => {
           showErrorMsg('Note save failed')
         })
+    },
+  },
+
+  computed: {
+    noteToShow() {
+      // return this.notes.filter((note) => note)
+    },
+    imageUrl() {
+      if (this.selectedFile) {
+        return URL.createObjectURL(this.selectedFile)
+      } else {
+        return null
+      }
     },
   },
 
@@ -192,3 +249,23 @@ export default {
     NoteDetails,
   },
 }
+
+// function onImgInput(ev) {
+//   loadImageFromInput(ev, renderImg)
+//   // gImgs.push()
+// }
+
+// // CallBack func will run on success load of the img
+// function loadImageFromInput(ev, onImageReady) {
+//   const reader = new FileReader()
+//   // After we read the file
+//   reader.onload = function (event) {
+//     let img = new Image() // Create a new html img element
+//     img.src = event.target.result // Set the img src to the img file we read
+//     // Run the callBack func, To render the img on the canvas
+//     img.onload = onImageReady.bind(null, img)
+//     // Can also do it this way:
+//     // img.onload = () => onImageReady(img)
+//   }
+//   reader.readAsDataURL(ev.target.files[0]) // Read the file we picked
+// }

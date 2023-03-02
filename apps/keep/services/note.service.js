@@ -10,8 +10,10 @@ export const noteService = {
   get,
   remove,
   save,
-  getEmptyNote,
+  getEmptyTxtNote,
   removeTodo,
+  getEmptyImgNote,
+  getEmptyTodoListNote,
 }
 
 const starterNotes = [
@@ -97,7 +99,7 @@ function save(note) {
 
 // function getEmptyNote(vendor = '', maxSpeed = 0) {
 
-function getEmptyNote() {
+function getEmptyTxtNote() {
   return {
     id: '',
     createdAt: Date.now(),
@@ -108,6 +110,35 @@ function getEmptyNote() {
     },
     info: {
       txt: '',
+    },
+  }
+}
+
+function getEmptyImgNote() {
+  return {
+    id: '',
+    type: 'NoteImg',
+    isPinned: false,
+    style: {
+      backgroundColor: '#bdc987"',
+    },
+    info: {
+      title: '',
+      url: '',
+    },
+  }
+}
+function getEmptyTodoListNote() {
+  return {
+    id: '',
+    type: 'NoteTodos',
+    isPinned: false,
+    style: {
+      backgroundColor: '#94b8c2',
+    },
+    info: {
+      title: '',
+      todos: [],
     },
   }
 }

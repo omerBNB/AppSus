@@ -41,7 +41,11 @@ export default {
     },
 
     removeTodo(todoIdx) {
-      this.$emit('removeTodo', todoIdx)
+      const note = JSON.parse(JSON.stringify(this.note))
+
+      note.info.todos.splice(todoIdx, 1)
+      console.log('note:', note)
+      this.$emit('updateNote', note)
     },
     AddTodo() {
       console.log('addTodo', this.userNewTodo)

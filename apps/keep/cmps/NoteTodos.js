@@ -10,7 +10,6 @@ export default {
                    </p>
                  </li>
               </ul>
-              <!-- <pre >{{info.todos}}></pre> -->
          
           `,
 

@@ -5,9 +5,15 @@ export default {
           class="note-details"
           :style="{'background-color': note.style.backgroundColor}"
           >
-          <input type="color" 
-          v-model="note.style.backgroundColor"
-          @input='changeBgcColor'/>
+          <button class="color-pic">
+            🎨
+            <input type="color" 
+            v-model="note.style.backgroundColor"
+            @input='changeBgcColor'/>
+          </button>
+         
+
+          <input type="color" ref="colorPicker" @input="setColor" style="display: none;">
 
               <input @input="changeTxt"
               v-model="note.info.txt"

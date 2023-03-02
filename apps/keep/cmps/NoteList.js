@@ -37,10 +37,6 @@ export default {
     },
   },
 
-  created() {
-    console.log('this.notes', this.notes)
-  },
-
   components: {
     NoteTxt,
     NoteImg,

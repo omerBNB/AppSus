@@ -1,6 +1,5 @@
-
- /**Notes */
- .main-container .notes-conatiner {
+/**Notes */
+.main-container .notes-conatiner {
   /* border: 1px solid rgb(101, 93, 168); */
   background-color: rgb(255, 249, 241);
   width: 85%;
@@ -24,9 +23,14 @@
   text-align: center;
   width: 20vw;
   border-radius: 15px;
-  border: 1px solid rgb(0, 0, 0);
+  border: 1px solid rgb(100, 96, 96);
   break-inside: avoid;
   padding: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.main-container .notes-conatiner ul .note:hover {
+  scale: 1.1;
 }
 
 .notes-conatiner ul .note .title {
@@ -53,6 +57,12 @@
   border: none;
   width: 70%;
   border-radius: 10px;
+}
+
+.addnote-container .add-img {
+  padding: 0;
+  opacity: 0;
+  /* width: 1px; */
 }
 
 .addnote-container div {
