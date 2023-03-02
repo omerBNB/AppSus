@@ -5,6 +5,8 @@ export default {
              <div>
              <input type="checkbox"  @click="toggleisStared" :checked="isStaredChecked"/>
              <input type="checkbox"/>
+             <button>📩</button>
+             <button @click="deleteThisMail(mail.id)">x</button>
             </div>
         <div>
             <h1>{{mail.subject}}</h1>
@@ -18,6 +20,9 @@ export default {
             this.mail.isStared = (this.mail.isStared) ? false : true
             this.$emit('mailStared', this.mail)
         },
+        deleteThisMail(currMailid){
+           this.$emit('deleteMail',currMailid)
+        }
     },
     computed: {
         isStaredChecked() {

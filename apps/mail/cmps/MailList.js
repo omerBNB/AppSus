@@ -39,12 +39,8 @@ export default {
             this.$emit('showTheDetails',currMailid)
         },
         deleteMail(currMailid){
-            Mailservice.remove(currMailid)
-            .then(() => {
-                const idx = this.mails.findIndex(mail => mail.id === currMailid)
-                this.mails.splice(idx, 1)
-                showSuccessMsg('mail removed')
-            })
+            this.$emit('deletethismail',currMailid)
+            
         },
         toggleReadUnread(mail){
             mail.isRead = (mail.isRead)? false : true
