@@ -1,0 +1,55 @@
+/**SIDE BAR */
+.main-container .side-bar-conatiner {
+    border: none;
+    background-color: #F6F8FC;
+    width: 18.5%;
+    border-radius: 15px;
+    /* margin-block-start: 3.9rem; */
+}
+
+.main-container .side-bar-conatiner h1 {
+    margin-inline-start: 24%;
+    font-size: 20px;
+}
+
+.main-container .side-bar-conatiner button {
+    background-color: #C2E7FF;
+    font-family: 'Franklin Gothic', 'Arial Narrow', Arial, sans-serif;
+    height: 55px;
+    width: 125px;
+    font-size: 1rem;
+    padding-left: 5px;
+}
+
+.main-container .side-bar-conatiner ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    padding: 5px;
+}
+
+.main-container .side-bar-conatiner ul li {
+    padding: 5px;
+    /* background-color: rgb(219, 229, 201); */
+    border: none;
+    text-align: left;
+    width: 95%;
+    border-radius: 15px;
+    padding: 8px;
+    padding-left: 12%;
+    margin-block-start: 1.5vh;
+    /* margin-inline-start: 17%; */
+    margin-inline-end: 5%;
+    transition: 0.3s;
+}
+
+.main-container .side-bar-conatiner ul li i{
+    text-align: center;
+    padding-right: 5px;
+    /* margin-inline-end: 5px; */
+}
+
+.main-container .side-bar-conatiner ul li:hover {
+    background-color: #D3E3FD;
+    cursor: pointer;
+}

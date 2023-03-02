@@ -17,16 +17,21 @@ export default {
         @showStared="showOnlyStared"
         @createEmail="createAnEmail"
         @showSent="showSentEmails"
+        @showTrash="showTrashMails"
         />
         <section class="mails-conatiner">
             <MailsSearchBar 
             @filtertxts="setFilterBytxt"/>
-           <MailsNavBar/>
+            <MailsNavBar/>
      <MailList 
-     :mails="getMails"
+     :mails="getFilterByTxt"
      @showTheDetails="showDetails"
+     @deletethismail="deleteMail"
      v-if="details===false"/>
-     <MailDetails v-if="mail" :mail="mail"/>
+     <MailDetails 
+     v-if="mail" 
+     :mail="mail"
+     @deleteMail="deleteMail"/>
     </section>
 </section>
 </section>
@@ -62,6 +67,7 @@ export default {
         showOnlyStared() {
             this.details = false
             this.mail = null
+            this.filterBy.txt = ''
             this.filterBy.isStared = true
             Mailservice.query(this.filterBy)
                 .then(eMails => this.mails = eMails)
@@ -85,8 +91,25 @@ export default {
                        showSuccessMsg('mail sent'))   
         },
         showSentEmails(){
+            this.details = false
+            this.mail = null
+            this.filterBy = { txt: '', isStared: false }
             Mailservice.getSentMails()
                      .then(mails => this.mails = mails)
+        },
+        deleteMail(currMailid){
+            const mail = this.mails.find(mail => mail.id === currMailid)
+            Mailservice.saveTrashedMail(mail)
+            Mailservice.remove(currMailid)
+            .then(() => {
+                const idx = this.mails.findIndex(mail => mail.id === currMailid)
+                this.mails.splice(idx, 1)
+                showSuccessMsg('mail removed')
+            })  
+        },
+        showTrashMails(){
+            Mailservice.queryTrashedMail()
+                      .then(mails => this.mails = mails)
         }
     },
     computed: {

@@ -4,17 +4,19 @@ import { utilService } from "../../../services/util.service.js"
 import { storageService } from '../../../services/async-storage.service.js'
 
 const MAILS_KEY = 'Mails'
+const TRASH_MAILS ='TrashMail'
+
 const emails = [{
     id: 'e101',
     subject: 'Miss you!',
-    body: 'Would love to catch up sometimes and maybe hang out',
+    body: 'SCAM - hi, i have a lot of money because i am a price - can you give me your bank account for transfer?',
     isRead: false,
     isSelected:false,
     isStared:false,
     isImportant:false,
     sentAt : 1551133930594,
     removedAt : null,
-    from: 'momo@momo.com',
+    from: 'nigerianprince@lies.com',
     to: 'user@appsus.com'
     },
     {
@@ -42,7 +44,47 @@ const emails = [{
     removedAt : null,
     from: 'omer@momo.com',
     to: 'user@appsus.com'
-    }]
+    },
+    {
+        id: 'e104',
+        subject: 'yeaaaaaaaaa!',
+        body: 'love to sing la la lal al la lal al la lala lal al lal ala ',
+        isRead: false,
+        isSelected:false,
+        isStared:false,
+        isImportant:false,
+        sentAt : 1551133930594,
+        removedAt : null,
+        from: 'dodayaron@momo.com',
+        to: 'user@appsus.com'
+        },
+        {
+        id: 'e105',
+        subject: 'wohhwwwoaww!',
+        body: 'hello there whats upppppppp',
+        isRead: false,
+        isSelected:false,
+        isStared:false,
+        isImportant:false,
+        sentAt : 1551133930594,
+        removedAt : null,
+        from: 'rochama@momo.com',
+        to: 'user@appsus.com'
+        },
+        {
+        id: 'e106',
+        subject: 'SSJ3!',
+        body: 'hi i am goku would you like me to teach you POWER?!',
+        isRead: false,
+        isSelected:false,
+        isStared:false,
+        isImportant:false,
+        sentAt : 1551133930594,
+        removedAt : null,
+        from: 'goku@momo.com',
+        to: 'user@appsus.com'
+        }
+]
 const loggedinUser = {
         email: 'user@appsus.com',
         fullname: 'Mahatma Appsus'
@@ -56,7 +98,9 @@ export const Mailservice = {
     remove,
     save,
     createMail,
-    getSentMails
+    getSentMails,
+    saveTrashedMail,
+    queryTrashedMail
 
 }
 
@@ -75,6 +119,22 @@ function query(filterBy = {}) {
                 return onlyUserMails
             }
     })
+}
+
+function queryTrashedMail(filterBy = {}){
+    return storageService.query(TRASH_MAILS)
+    .then(Mails => {
+        if (filterBy.txt) {
+            const regex = new RegExp(filterBy.txt, 'i')
+            return Mails.filter(mail => regex.test(mail.body))
+        }
+        if(filterBy.isStared){
+            return Mails.filter(mail => mail.isStared)
+        }
+        else{
+            return Mails
+        }
+})
 }
 
 function getSentMails(filterBy = {}){
@@ -101,8 +161,16 @@ function get(MailId) {
 
 function remove(MailId) {
     return storageService.remove(MAILS_KEY, MailId)
+           
 }
 
+function saveTrashedMail(Mail) {
+    if (Mail.id) {
+        return storageService.put(TRASH_MAILS, Mail)
+    } else {
+        return storageService.post(TRASH_MAILS, Mail)
+    }
+}
 function save(Mail) {
     if (Mail.id) {
         return storageService.put(MAILS_KEY, Mail)

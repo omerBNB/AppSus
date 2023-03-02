@@ -2,7 +2,7 @@ export default {
     props: ['mail'],
     template: `             
     <section>
-                    <div class="1">
+                    <div class="checkboxes">
                         <input type="checkbox" @click="toggleIsSelected" :checked="isSelectedChecked"/>
                         <input type="checkbox"  @click="toggleisStared" :checked="isStaredChecked"/>
                         <input type="checkbox"/>
@@ -15,6 +15,7 @@ export default {
                     <div class="content" @click="showDetails(mail.id)">
                     <h4>{{mail.subject}} -</h4>
                     <p>{{displayTxt}}</p>
+                    
                     </div>
 
                     <div>
