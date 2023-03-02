@@ -63,7 +63,7 @@ export default {
      </section> 
      </section> 
       `,
-
+  //
   data() {
     return {
       note: noteService.getEmptyTxtNote(),
