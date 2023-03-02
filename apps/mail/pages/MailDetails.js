@@ -25,6 +25,9 @@ export default {
         },
         backToEmails(){
             this.$emit('backtoallmails')
+        },
+        ReadUnread(mail){
+            this.$emit('readUread',mail)
         }
     },
     computed: {

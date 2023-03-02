@@ -32,6 +32,7 @@ export default {
      v-if="mail" 
      :mail="mail"
      @backtoallmails="showAllMails"
+     @readUread="readUnreadEmail"
      @deleteMail="deleteMail"/>
     </section>
 </section>
@@ -84,6 +85,16 @@ export default {
             this.details = true
             Mailservice.get(currMailid)
                 .then(mail => this.mail = mail)
+                .then(mail => {
+                    mail.isRead = (mail.isRead)? false : true
+                    return mail
+                })
+                .then(mail => Mailservice.save(mail))
+                
+        },
+        readUnreadEmail(mail){
+            mail.isRead = (mail.isRead)? false : true
+            Mailservice.save(mail)
         },
         sendNewEmail(content) {
             this.creation = null
