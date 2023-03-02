@@ -21,10 +21,7 @@ export default {
 
           <section class="notes-conatiner">
               <section class="search-container">
-                <!-- <form>
-                  <button>🔍</button>
-                  <input type="search" placeholder="Search Keep..." />
-                 </form> -->
+              
                  <form @submit.prevent="filterbytxt" >
                <button><i class="fa-solid fa-magnifying-glass"></i></button>
                 <input type="search" placeholder="Search mail" v-model="filtertxt" />
@@ -38,7 +35,6 @@ export default {
                         <button type="button" @click="changeInputType('NoteTxt')">A</button>
                         <button type="button" @click="changeInputType('img')" >🖼</button>
                         <input type="file" ref="fileInput" @change="handleFileChange" style="display: none;">
-                        <!-- <input class="add-img" type="file" @change="onFileSelected" >🖼</input></button> -->
                         <button type="button" @click="changeInputType('NoteVideo')" >📽</button>
                         <button type="button" @click="changeInputType('todoList')" >📃</button>
                         <button type="submit" >+</button>
@@ -69,7 +65,7 @@ export default {
      </section> 
      </section> 
       `,
-  //
+
   data() {
     return {
       note: noteService.getEmptyTxtNote(),
