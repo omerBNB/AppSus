@@ -1,5 +1,6 @@
 .search-container {
   background-color: #f6f8fc;
+  border-radius: 15px;
 }
 .search-container form {
   background-color: #eaf1fb;
