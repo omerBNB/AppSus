@@ -33,7 +33,6 @@ export default {
     },
 
     remove(noteId) {
-      console.log('todoId:', noteId)
       this.$emit('removeNote', noteId)
     },
   },

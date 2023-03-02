@@ -5,16 +5,21 @@
   right: 0;
   margin-left: auto;
   margin-right: auto;
-  background-color: azure;
   border: 1px solid black;
   border-radius: 15px;
   padding: 20px;
-  width: 35%;
+  width: 45%;
   -webkit-box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.63);
   box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.63);
 }
 
-.note-details button {
+.note-details input {
+  border: none;
+  width: 100%;
+  /* background-color: ; */
+}
+
+.note-details .close-modal {
   background-color: bisque;
   position: absolute;
   top: -4px;
@@ -24,4 +29,8 @@
 
 .note-details button:hover {
   background-color: rgb(239, 215, 186);
+}
+
+.note-details .add-todo {
+  background-color: bisque;
 }

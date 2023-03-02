@@ -4,6 +4,7 @@ export const storageService = {
   post,
   put,
   remove,
+  removeTodo,
 }
 
 function query(entityType, delay = 500) {
@@ -38,6 +39,15 @@ function put(entityType, updatedEntity) {
 }
 
 function remove(entityType, entityId) {
+  return query(entityType).then((entities) => {
+    const idx = entities.findIndex((entity) => entity.id === entityId)
+    if (idx < 0) throw new Error(`Unknown Entity ${entityId}`)
+    entities.splice(idx, 1)
+    _save(entityType, entities)
+  })
+}
+
+function removeTodo(entityType, entityId) {
   return query(entityType).then((entities) => {
     const idx = entities.findIndex((entity) => entity.id === entityId)
     if (idx < 0) throw new Error(`Unknown Entity ${entityId}`)

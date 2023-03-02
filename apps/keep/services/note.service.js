@@ -11,6 +11,7 @@ export const noteService = {
   remove,
   save,
   getEmptyNote,
+  removeTodo,
 }
 
 const starterNotes = [
@@ -78,6 +79,12 @@ function get(noteId) {
 
 function remove(noteId) {
   return storageService.remove(NOTES_KEY, noteId)
+}
+
+function removeTodo(note, todoIdx) {
+  console.log('todoIdx:', todoIdx)
+  console.log('note', note)
+  return storageService.remove(NOTES_KEY, todoIdx)
 }
 
 function save(note) {
