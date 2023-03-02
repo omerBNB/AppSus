@@ -2,15 +2,15 @@ export default {
     props: ['mail'],
     template: `
     <section>
-             <div>
-             <input type="checkbox"  @click="toggleisStared" :checked="isStaredChecked"/>
-             <input type="checkbox"/>
-             <button>📩</button>
-             <button @click="deleteThisMail(mail.id)">x</button>
+             <div class="details-nav">
+             <i @click="backToEmails" class="fa-solid fa-arrow-left"></i>
+             <input type="checkbox"  class="star" @click="toggleisStared" :checked="isStaredChecked"/>
+             <i @click.stop="ReadUnread(mail)" class="fa-regular fa-envelope"></i>
+             <i @click="deleteThisMail(mail.id)" class="fa-regular fa-trash-can"></i>
             </div>
-        <div>
-            <h1>{{mail.subject}}</h1>
-            <h2>{{mail.from}}</h2>
+        <div class="main-details-content">
+            <h3>{{mail.subject}}</h3>
+            <h4>{{mail.from}}</h4>
             <p>{{mail.body}}</p>
         </div>
     </section>
@@ -22,6 +22,9 @@ export default {
         },
         deleteThisMail(currMailid){
            this.$emit('deleteMail',currMailid)
+        },
+        backToEmails(){
+            this.$emit('backtoallmails')
         }
     },
     computed: {

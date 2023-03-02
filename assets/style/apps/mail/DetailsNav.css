@@ -1,0 +1,11 @@
+.details-nav{
+    display: flex;
+    width: 20%;
+    justify-content: space-between;
+    margin-inline-start: 2%;
+    cursor: pointer;
+}
+.main-details-content{
+    margin-block-start: 5%;
+    margin-inline-start: 2%;
+}

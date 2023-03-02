@@ -1,7 +1,7 @@
 export default {
     template:`
      <nav class="nav-bar">
-                <input type="checkbox"/>
+                <!-- <input type="checkbox"/> -->
                 <!-- Todo  select bar -->
                 <!-- <button>Refresh</button> -->
                 <!-- <button>Mark all</button> -->

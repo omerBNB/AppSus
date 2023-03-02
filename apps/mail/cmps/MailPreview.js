@@ -4,8 +4,8 @@ export default {
     <section>
                     <div class="checkboxes">
                         <input type="checkbox" @click="toggleIsSelected" :checked="isSelectedChecked"/>
-                        <input type="checkbox"  @click="toggleisStared" :checked="isStaredChecked"/>
-                        <input type="checkbox"/>
+                        <input class="star" type="checkbox"  @click="toggleisStared" :checked="isStaredChecked"/>
+                        <input class="cloud" type="checkbox"/>
                     </div>
 
                     <div class="sender" @click="showDetails(mail.id)">
@@ -15,7 +15,10 @@ export default {
                     <div class="content" @click="showDetails(mail.id)">
                     <h4>{{mail.subject}} -</h4>
                     <p>{{displayTxt}}</p>
-                    
+                    <span>
+                            <i @click.stop="ReadUnread(mail)" class="fa-regular fa-envelope"></i>
+                            <i @click.stop="deleteMails(mail.id)" class="fa-regular fa-trash-can"></i>
+                        </span>
                     </div>
 
                     <div>
@@ -27,7 +30,7 @@ export default {
     data() {
         return {
             date: this.mail.sentAt,
-            length: 20,
+            length: 30,
         }
     },
     methods: {
@@ -41,6 +44,12 @@ export default {
         toggleisStared() {
             this.mail.isStared = (this.mail.isStared) ? false : true
             this.$emit('mailStared', this.mail)
+        },
+        ReadUnread(mail){
+            this.$emit('readnread',mail)
+        },
+        deleteMails(currMailid){
+            this.$emit('deletemail',currMailid)
         }
     },
     computed: {
