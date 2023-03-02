@@ -20,12 +20,16 @@ export default {
 
 
           <section class="notes-conatiner">
-              <div class="search-container">
-                <form>
+              <section class="search-container">
+                <!-- <form>
                   <button>🔍</button>
                   <input type="search" placeholder="Search Keep..." />
-                 </form>
-                </div>
+                 </form> -->
+                 <form @submit.prevent="filterbytxt" >
+               <button><i class="fa-solid fa-magnifying-glass"></i></button>
+                <input type="search" placeholder="Search mail" v-model="filtertxt" />
+               </form>
+                </section>
 
                     <form class="addnote-container" @submit.prevent="uploadNote">
                       <input v-model="userTxt" class="takeANote" :type="text" :placeholder="currInputType"/>

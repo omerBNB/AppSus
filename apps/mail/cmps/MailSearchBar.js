@@ -1,5 +1,5 @@
 export default {
-    template: `
+  template: `
 <section class="search-container">
     <form @submit.prevent="filterbytxt" >
         <button><i class="fa-solid fa-magnifying-glass"></i></button>
@@ -7,17 +7,16 @@ export default {
     </form>
 </section>
 `,
-    data() {
-        return {
-            filtertxt: ''
-        }
-    },
-    methods: {
-        filterbytxt() {
-            this.$emit('filtertxts', this.filtertxt)
-            console.log(' this.filtertxt', this.filtertxt)
-            this.filtertxt = null
-        }
+  data() {
+    return {
+      filtertxt: '',
     }
-
+  },
+  methods: {
+    filterbytxt() {
+      this.$emit('filtertxts', this.filtertxt)
+      console.log(' this.filtertxt', this.filtertxt)
+      this.filtertxt = null
+    },
+  },
 }
