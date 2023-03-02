@@ -1,4 +1,5 @@
 import { noteService } from '../services/note.service.js'
+import { youtubeService } from '../services/youtube.service.js'
 import NoteList from '../cmps/NoteList.js'
 import NoteDetails from '../cmps/NoteDetails.js'
 
@@ -71,6 +72,7 @@ export default {
       currInputType: 'NoteTxt',
       selectedNote: null,
       selectedImg: null,
+      videoUrl: null,
     }
   },
 
@@ -134,12 +136,15 @@ export default {
 
     changeInputType(val) {
       this.currInputType = val
-      console.log('this.currInputType', this.currInputType)
       if (this.currInputType === 'NoteTxt') this.note = noteService.getEmptyTxtNote()
       else if (this.currInputType === 'img') {
         this.note = noteService.getEmptyImgNote()
         this.chooseFile()
       } else if (this.currInputType === 'todoList') this.note = noteService.getEmptyTodoListNote()
+      else if (this.currInputType === 'video') {
+        this.note = noteService.getEmptyVideoNote()
+        this.uploadVideo(this.userTxt)
+      }
     },
 
     openDetails(note) {
@@ -224,6 +229,28 @@ export default {
         .catch((err) => {
           showErrorMsg('Note save failed')
         })
+    },
+
+    uploadVideo(txt) {
+      console.log('txt', txt)
+      youtubeService.getYoutubeTopRes(txt).then((data) => {
+        this.videoUrl = data.items[0].id.videoId
+        console.log('this.videoUrl:', this.videoUrl)
+        // if (!this.selectedFile) return
+        this.note.info.url = this.videoUrl
+        console.log('po1')
+        noteService
+          .save(this.note)
+          .then(() => {
+            this.notes.push(this.note)
+            // this.note = noteService.getEmptyNote()
+            showSuccessMsg('Note saved')
+            // this.$router.push('/keep' + this.note.id)
+          })
+          .catch(() => {
+            showErrorMsg('Note save failed')
+          })
+      })
     },
   },
 

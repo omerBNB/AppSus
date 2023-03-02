@@ -14,6 +14,7 @@ export const noteService = {
   removeTodo,
   getEmptyImgNote,
   getEmptyTodoListNote,
+  getEmptyVideoNote,
 }
 
 const starterNotes = [
@@ -120,7 +121,7 @@ function getEmptyImgNote() {
     type: 'NoteImg',
     isPinned: false,
     style: {
-      backgroundColor: '#bdc987"',
+      backgroundColor: '#bdc987',
     },
     info: {
       title: '',
@@ -128,6 +129,22 @@ function getEmptyImgNote() {
     },
   }
 }
+
+function getEmptyVideoNote() {
+  return {
+    id: '',
+    type: 'video',
+    isPinned: false,
+    style: {
+      backgroundColor: '#bdc987',
+    },
+    info: {
+      title: '',
+      url: '',
+    },
+  }
+}
+
 function getEmptyTodoListNote() {
   return {
     id: '',

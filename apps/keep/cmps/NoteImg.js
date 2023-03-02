@@ -1,7 +1,16 @@
 export default {
   props: ['info'],
   template: `
-            <h2 class="title">{{info.title}}</h2>
-            <img :src="info.url"/>
+    <!-- <li> -->
+        <!-- <article class="note"> -->
+            <h2>{{info.title}}</h2>
+            <img :src="'https://www.youtube.com/embed/'+info.url"/>
+          <!-- </article> -->
+  <!-- </li> -->
         `,
+
+  //   data() {
+
+  // return
+  //   },
 }
