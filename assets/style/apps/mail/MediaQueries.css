@@ -250,7 +250,7 @@
     }
 
     .main-container .mails-conatiner ul li section .content p {
-        font-size: .5rem;
+        font-size: .4rem;
         margin-inline-start: 10px;
     }
 
@@ -597,6 +597,16 @@
         /* justify-content: space-between; */
     }
 
+    .main-container .mails-conatiner ul li section .content p {
+        font-size: .7rem;
+        margin-inline-start: 10px;
+    }
+
+    .main-container .mails-conatiner ul li section .content h4 {
+        font-size: .6rem;
+        margin-inline-start: 35px;
+    }
+
     .main-container .mails-conatiner ul li section .content span {
         display: none;
         position: absolute;
@@ -618,7 +628,9 @@
         justify-self: left;
         align-self: center;
         margin-inline-start: 10%;
+        font-size: .8rem;
     }
+
 
     .main-container .mails-conatiner ul li section .checkboxes {
         width: 100%;
@@ -802,6 +814,7 @@
     /* Search Bar */
     .search-container {
         background-color: #F6F8FC;
+
     }
 
     .search-container form {
@@ -916,7 +929,15 @@
         margin-inline-start: 10%;
         /* justify-content: space-between; */
     }
+    .main-container .mails-conatiner ul li section .content p {
+        font-size: .7rem;
+        margin-inline-start: 10px;
+    }
 
+    .main-container .mails-conatiner ul li section .content h4 {
+        font-size: .8rem;
+        margin-inline-start: 35px;
+    }
     .main-container .mails-conatiner ul li section .content span {
         display: none;
         position: absolute;
@@ -938,6 +959,7 @@
         justify-self: left;
         align-self: center;
         margin-inline-start: 10%;
+        font-size: 1rem;
     }
 
     .main-container .mails-conatiner ul li section .checkboxes {
