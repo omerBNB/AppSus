@@ -21,8 +21,10 @@ export default {
 
           <section class="notes-conatiner">
               <div class="search-container">
+                <form>
                   <button>🔍</button>
                   <input type="search" placeholder="Search Keep..." />
+                 </form>
                 </div>
 
                     <form class="addnote-container" @submit.prevent="uploadNote">

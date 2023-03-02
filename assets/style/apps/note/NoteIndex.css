@@ -4,10 +4,15 @@
   background-color: rgb(255, 249, 241);
   width: 85%;
   border-radius: 15px;
-  padding: 5px;
+  padding: 0px;
 }
 .main-container .notes-conatiner .nav-bar {
   border: 1px solid rgb(101, 93, 168);
+}
+
+.main-container input {
+  /* width: 50%; */
+  border-radius: 15px;
 }
 
 .main-container .notes-conatiner ul {
@@ -62,7 +67,7 @@
 .addnote-container .add-img {
   padding: 0;
   opacity: 0;
-  /* width: 1px; */
+  width: 1px;
 }
 
 .addnote-container div {
