@@ -133,7 +133,7 @@ function getEmptyImgNote() {
 function getEmptyVideoNote() {
   return {
     id: '',
-    type: 'video',
+    type: 'NoteVideo',
     isPinned: false,
     style: {
       backgroundColor: '#bdc987',

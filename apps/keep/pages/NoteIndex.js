@@ -33,7 +33,7 @@ export default {
                         <button type="button" @click="changeInputType('img')" >🖼</button>
                         <input type="file" ref="fileInput" @change="handleFileChange" style="display: none;">
                         <!-- <input class="add-img" type="file" @change="onFileSelected" >🖼</input></button> -->
-                        <button type="button" @click="changeInputType('video')" >📽</button>
+                        <button type="button" @click="changeInputType('NoteVideo')" >📽</button>
                         <button type="button" @click="changeInputType('todoList')" >📃</button>
                         <button type="submit" >+</button>
                       </div>
@@ -141,7 +141,7 @@ export default {
         this.note = noteService.getEmptyImgNote()
         this.chooseFile()
       } else if (this.currInputType === 'todoList') this.note = noteService.getEmptyTodoListNote()
-      else if (this.currInputType === 'video') {
+      else if (this.currInputType === 'NoteVideo') {
         this.note = noteService.getEmptyVideoNote()
         this.uploadVideo(this.userTxt)
       }
@@ -243,6 +243,7 @@ export default {
           .save(this.note)
           .then(() => {
             this.notes.push(this.note)
+            console.log('this.note:', this.note)
             // this.note = noteService.getEmptyNote()
             showSuccessMsg('Note saved')
             // this.$router.push('/keep' + this.note.id)

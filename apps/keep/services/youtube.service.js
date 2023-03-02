@@ -10,8 +10,7 @@ const STORAGE_KEY = 'youtubeDB'
 const API_KEY = 'AIzaSyD9_iqARjy74PqkjSJM0Nco0qyDUp41gHA'
 function getYoutubeTopRes(value) {
   const youtube = utilService.loadFromStorage(STORAGE_KEY)
-  console.log('youtube:', youtube)
-  if (youtube && value === 'SpongeBob') return Promise.resolve(youtube.data)
+  if (youtube) return Promise.resolve(youtube.data)
   return axios
     .get(
       `https://www.googleapis.com/youtube/v3/search?part=snippet&videoEmbeddable=true&type=video&key=${API_KEY}&q=${value}`
