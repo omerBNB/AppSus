@@ -3,7 +3,7 @@ export default {
     template: `             
     <section>
                     <div class="checkboxes">
-                        <input type="checkbox" @click="toggleIsSelected" :checked="isSelectedChecked"/>
+                        <input class="selected" type="checkbox" @click="toggleIsSelected" :checked="isSelectedChecked"/>
                         <input class="star" type="checkbox"  @click="toggleisStared" :checked="isStaredChecked"/>
                         <input class="cloud" type="checkbox"/>
                     </div>
