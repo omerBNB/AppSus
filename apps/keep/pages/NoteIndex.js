@@ -9,11 +9,12 @@ export default {
   template: `
       <section class="main-container"> 
           <section class="side-bar-conatiner"> 
+            <h1>AppSus</h1>
               <ul>
-                  <li><i class="fa-sharp fa-solid fa-file-lines"></i>Text</li>
-                  <li><i class="fa-sharp fa-solid fa-image"></i>Images</li>
-                  <li><i class="fa-sharp fa-solid fa-video"></i>Videos</li>
-                  <li><i class="fa-sharp fa-solid fa-list-ul"></i>Todos</li>
+                  <li @click="filterBy = 'NoteTxt'"><i class="fa-sharp fa-solid fa-file-lines"></i>Text</li>
+                  <li @click="filterBy = 'NoteImg'"><i class="fa-sharp fa-solid fa-image"></i>Images</li>
+                  <li @click="filterBy = 'NoteVideo'"><i class="fa-sharp fa-solid fa-video"></i>Videos</li>
+                  <li @click="filterBy = 'NoteTodos'"><i class="fa-sharp fa-solid fa-list-ul"></i>Todos</li>
              </ul>
           </section>
 
@@ -45,7 +46,7 @@ export default {
               <NoteList 
               @removeNote="removeNote"
               @openDetails="openDetails"
-              :notes="notes"/> 
+              :notes="noteToShow"/> 
               <!-- todo: notes to show in computed (for filter)  -->
   
                <!-- </section> -->
@@ -74,6 +75,7 @@ export default {
       selectedNote: null,
       selectedImg: null,
       videoUrl: null,
+      filterBy: null,
     }
   },
 
@@ -81,10 +83,12 @@ export default {
     chooseFile() {
       this.$refs.fileInput.click()
     },
+
     removeTodo(idx) {
       this.selectedNote.info.todos.splice(idx, 1)
       this.updateNote(this.selectedNote)
     },
+
     handleFileChange(event) {
       console.log('Selected file:', event.target.files[0])
       this.selectedFile = event.target.files[0]
@@ -263,8 +267,17 @@ export default {
 
   computed: {
     noteToShow() {
-      // return this.notes.filter((note) => note)
+      if (!this.filterBy) return this.notes
+      if (this.filterBy === 'NoteTxt') return this.notes.filter((note) => note.type === 'NoteTxt')
+      if (this.filterBy === 'NoteImg') return this.notes.filter((note) => note.type === 'NoteImg')
+      if (this.filterBy === 'NoteVideo') {
+        console.log('hey')
+        return this.notes.filter((note) => note.type === 'NoteVideo')
+      }
+      if (this.filterBy === 'NoteTodos')
+        return this.notes.filter((note) => note.type === 'NoteTodos')
     },
+
     imageUrl() {
       if (this.selectedFile) {
         return URL.createObjectURL(this.selectedFile)
