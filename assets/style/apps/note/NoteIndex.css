@@ -1,8 +1,17 @@
+.pin-notes-container {
+  border: 1px solid rgb(124, 121, 121);
+  border-radius: 15px;
+  background-color: rgb(233, 255, 248);
+}
+
+.pin-notes-container h1 {
+  text-align: center;
+  font-size: 1em;
+}
+
 /** notes-container */
 
 .main-container .notes-conatiner {
-  /* border: 1px solid rgb(101, 93, 168); */
-  /* background-color: rgb(245, 237, 228); */
   background: linear-gradient(331deg, rgba(253, 253, 253, 1) 36%, rgb(220, 250, 204) 74%);
   width: 85%;
   /* border-radius: 15px; */
@@ -88,14 +97,20 @@
 
 .notes-conatiner ul .note .title {
   margin: 0;
+  font-size: smaller;
+}
+
+.notes-conatiner ul .note p {
+  margin: 0;
+  font-size: smaller;
 }
 
 .notes-conatiner ul .note img {
   border-radius: 15px;
-  width: 100%;
+  width: 70%;
 }
 
-.note .remove-note {
+.note.remove-note {
   width: 20px;
   background-color: rgb(225, 225, 248);
 }

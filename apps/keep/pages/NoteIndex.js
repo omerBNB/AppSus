@@ -10,7 +10,9 @@ export default {
       <section class="main-container"> 
           <section class="side-bar-conatiner"> 
             <h1>AppSus</h1>
+
               <ul>
+                <li @click="filterBy = 'All'"><i class="fa-solid fa-house"></i>All</li>
                   <li @click="filterBy = 'NoteTxt'"><i class="fa-sharp fa-solid fa-file-lines"></i>Text</li>
                   <li @click="filterBy = 'NoteImg'"><i class="fa-sharp fa-solid fa-image"></i>Images</li>
                   <li @click="filterBy = 'NoteVideo'"><i class="fa-sharp fa-solid fa-video"></i>Videos</li>
@@ -33,21 +35,31 @@ export default {
 
                       <div>
                         <button type="button" @click="changeInputType('NoteTxt')">A</button>
-                        <button type="button" @click="changeInputType('img')" >🖼</button>
+                        <button type="button" @click="changeInputType('img')" ><i class="fa-solid fa-image"></i></button>
                         <input type="file" ref="fileInput" @change="handleFileChange" style="display: none;">
-                        <button type="button" @click="changeInputType('NoteVideo')" >📽</button>
-                        <button type="button" @click="changeInputType('todoList')" >📃</button>
-                        <button type="submit" >+</button>
+                        <button type="button" @click="changeInputType('NoteVideo')" ><i class="fa-brands fa-youtube"></i></i></button>
+                        <button type="button" @click="changeInputType('todoList')" ><i class="fa-solid fa-list"></i></button>
+                        <button type="submit" ><i class="fa-regular fa-plus"></i></button>
                       </div>
 
                       </form>
 
                       <section>
+
+                      <section v-if="pinnedNotes.length" class="pin-notes-container">
+                        <h1>Pinned Notes:</h1>
+                      <NoteList 
+                      @removeNote="removeNote"
+                     @openDetails="openDetails"
+                     :notes="pinnedNotes"/> 
+                      </section>
+
+
               <NoteList 
               @removeNote="removeNote"
+              @addPinNote='pinNote'
               @openDetails="openDetails"
               :notes="noteToShow"/> 
-              <!-- todo: notes to show in computed (for filter)  -->
   
                <!-- </section> -->
                </section>
@@ -60,6 +72,7 @@ export default {
                @changeBgcColor='changeBgcColor'
                @addTodos='addTodo'
                @deleteTodo='removeTodo'
+              
                v-if="selectedNote"/>
                
      </section> 
@@ -75,11 +88,18 @@ export default {
       selectedNote: null,
       selectedImg: null,
       videoUrl: null,
-      filterBy: null,
+      filterBy: 'All',
+      pinnedNotes: [],
     }
   },
 
   methods: {
+    pinNote(note) {
+      note.isPinned = !note.isPinned
+      this.pinnedNotes.push(note)
+      this.updateNote(note)
+    },
+
     chooseFile() {
       this.$refs.fileInput.click()
     },
@@ -213,12 +233,10 @@ export default {
     },
 
     uploadNote() {
-      console.log('upload Note', this.userTxt)
       if (this.userTxt === '') return
       if (this.currInputType === 'NoteTxt') this.addTxtNote(this.userTxt, this.currInputType)
       if (this.currInputType === 'todoList') this.addTodoList(this.userTxt, this.currInputType)
       if (this.currInputType === 'img') {
-        console.log('heyyy')
         const imgUrl = this.imageUrl()
         this.addImgNote(this.userTxt, imgUrl, this.selectedImg)
       }
@@ -268,14 +286,21 @@ export default {
   computed: {
     noteToShow() {
       if (!this.filterBy) return this.notes
-      if (this.filterBy === 'NoteTxt') return this.notes.filter((note) => note.type === 'NoteTxt')
-      if (this.filterBy === 'NoteImg') return this.notes.filter((note) => note.type === 'NoteImg')
-      if (this.filterBy === 'NoteVideo') {
-        console.log('hey')
-        return this.notes.filter((note) => note.type === 'NoteVideo')
+      if (this.filterBy === 'All') return this.notes.filter((note) => !note.isPinned)
+
+      if (this.filterBy === 'NoteTxt') {
+        return this.notes.filter((note) => note.type === 'NoteTxt' && !note.isPinned)
       }
+      if (this.filterBy === 'NoteImg') {
+        return this.notes.filter((note) => note.type === 'NoteImg' && !note.isPinned)
+      }
+
+      if (this.filterBy === 'NoteVideo') {
+        return this.notes.filter((note) => note.type === 'NoteVideo' && !note.isPinned)
+      }
+
       if (this.filterBy === 'NoteTodos')
-        return this.notes.filter((note) => note.type === 'NoteTodos')
+        return this.notes.filter((note) => note.type === 'NoteTodos' && !note.isPinned)
     },
 
     imageUrl() {
@@ -288,7 +313,10 @@ export default {
   },
 
   created() {
-    noteService.query().then((notes) => (this.notes = notes))
+    noteService.query().then((notes) => {
+      this.notes = notes
+      this.pinnedNotes = this.notes.filter((note) => note.isPinned)
+    })
   },
 
   components: {

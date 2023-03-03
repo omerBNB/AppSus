@@ -5,6 +5,7 @@ import NoteTodosEdit from './NoteEdit/NoteTodosEdit.js'
 export default {
   props: ['selectedNote'],
   template: `
+  <div class="back-drop">
 <Component
 :is="noteType"
 :note='selectedNote'
@@ -14,9 +15,6 @@ export default {
 @removeTodo="removeTodo"
 >
       `,
-  created() {
-    // console.log('this.selectedNote', this.selectedNote)
-  },
 
   computed: {
     noteType() {
