@@ -1,7 +1,9 @@
-/**Notes */
+/** notes-container */
+
 .main-container .notes-conatiner {
   /* border: 1px solid rgb(101, 93, 168); */
-  background-color: rgb(245, 237, 228);
+  /* background-color: rgb(245, 237, 228); */
+  background: linear-gradient(331deg, rgba(253, 253, 253, 1) 36%, rgb(220, 250, 204) 74%);
   width: 85%;
   /* border-radius: 15px; */
   border-left: 1px solid rgb(130, 119, 119);
@@ -9,49 +11,10 @@
   border-radius: 10px;
   padding: 7px;
 }
-.main-container .notes-conatiner .nav-bar {
-  border: 1px solid rgb(101, 93, 168);
-}
 
 .main-container input {
   padding: 0;
   border-radius: 15px;
-}
-
-.main-container .notes-conatiner ul {
-  list-style: none;
-  font-size: 1rem;
-  padding: 0;
-  columns: 3 90px;
-  column-rule: 2px;
-  column-gap: 3em;
-}
-
-.main-container .notes-conatiner ul .note {
-  text-align: center;
-  border-radius: 15px;
-  border: 1px solid rgb(100, 96, 96);
-  break-inside: avoid;
-  padding: 5px;
-  cursor: pointer;
-  transition: 0.3s;
-  margin: 8px;
-}
-.main-container .notes-conatiner ul .note > * {
-  width: 100%;
-}
-
-.main-container .notes-conatiner ul .note:hover {
-  scale: 1.1;
-}
-
-.notes-conatiner ul .note .title {
-  margin: 0;
-}
-
-.notes-conatiner ul .note img {
-  border-radius: 15px;
-  width: 100%;
 }
 
 /** addnote-container */
@@ -59,14 +22,13 @@
   margin: 10px;
   display: flex;
   padding: 3px;
-  /* border: 1px solid black; */
   border-radius: 10px;
   align-items: center;
   justify-content: space-between;
 }
 
 .addnote-container input {
-  padding: 10px;
+  padding: 11px;
   border: none;
   width: 70%;
   border-radius: 10px;
@@ -94,4 +56,49 @@
 
 .addnote-container div button:hover {
   scale: 1.2;
+}
+
+/**List */
+.main-container .notes-conatiner ul {
+  list-style: none;
+  font-size: 1rem;
+  padding: 0;
+  columns: 3 90px;
+  column-rule: 5px;
+  column-gap: 3em;
+}
+
+.main-container .notes-conatiner ul .note {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  text-align: center;
+  border-radius: 15px;
+  border: 1px solid rgb(161, 158, 158);
+  break-inside: avoid;
+  padding: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+  margin: 10px;
+}
+
+.main-container .notes-conatiner ul .note:hover {
+  scale: 1.1;
+}
+
+.notes-conatiner ul .note .title {
+  margin: 0;
+}
+
+.notes-conatiner ul .note img {
+  border-radius: 15px;
+  width: 100%;
+}
+
+.note .remove-note {
+  width: 20px;
+  background-color: rgb(225, 225, 248);
+}
+.note iframe {
+  width: 100%;
 }

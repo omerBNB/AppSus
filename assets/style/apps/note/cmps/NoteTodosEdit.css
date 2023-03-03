@@ -1,0 +1,30 @@
+.note-details.todos ul {
+  display: flex;
+  justify-items: center;
+  /* border: 1px solid black; */
+  flex-wrap: wrap;
+}
+
+.note-details.todos li {
+  /* border: 1px solid orange; */
+  display: flex;
+  width: 100%;
+}
+
+.note-details.todos li button {
+  width: 20px;
+  height: 20px;
+  margin-inline-start: 5px;
+}
+.note-details.todos .todo-input {
+  width: 50%;
+}
+
+.note-details.todos .btns-todo {
+  /* border: 1px solid black; */
+  display: flex;
+}
+.note-details.todos .btns-todo {
+  /* border: 1px solid black; */
+  display: flex;
+}

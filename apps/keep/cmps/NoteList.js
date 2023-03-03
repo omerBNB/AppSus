@@ -20,7 +20,9 @@ export default {
                     @changeInfo="updateNote" 
                     :is="note.type"
                     :info="note.info"/>
-                    <button @click.stop="remove(note.id)">x</button>
+                    <div>
+                      <button title="delete note" class="remove-note" @click.stop="remove(note.id)">x</button>
+                   </div>
 
                   </article>
                   </li>

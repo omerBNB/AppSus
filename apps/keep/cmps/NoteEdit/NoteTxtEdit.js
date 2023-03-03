@@ -5,22 +5,27 @@ export default {
           class="note-details"
           :style="{'background-color': note.style.backgroundColor}"
           >
-          <button class="color-pic">
-            🎨
+         
+         
+
+          <!-- <input type="color" ref="colorPicker" @input="setColor" style="display: none;"> -->
+          <label class="title">
+          Click to Edit:
+            <input @input="changeTxt"
+            v-model="note.info.txt"
+            type="text" :value="note.info.txt"
+            :style="{'background-color': note.style.backgroundColor}"
+            />
+          </label>
+              <button class="close-modal" @click='closeModal'>x</button>
+              
+              <button class="color-pic">
+          <i class="fa-solid fa-palette"></i>
             <input type="color" 
             v-model="note.style.backgroundColor"
             @input='changeBgcColor'/>
           </button>
-         
 
-          <input type="color" ref="colorPicker" @input="setColor" style="display: none;">
-
-              <input @input="changeTxt"
-              v-model="note.info.txt"
-              type="text" :value="note.info.txt"
-              :style="{'background-color': note.style.backgroundColor}"
-              />
-              <button class="close-modal" @click='closeModal'>x</button>
           </article>
           `,
 
