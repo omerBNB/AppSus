@@ -2,12 +2,10 @@ export default {
   props: ['note'],
   template: `
   <article
-          class="note-details"
+          class="note-details todos"
           :style="{'background-color': note.style.backgroundColor}"
           >
-          <input type="color" 
-          v-model="note.style.backgroundColor"
-          @input='changeBgcColor'/>
+         
 
               <input type="text" 
               @input="changeTxt"
@@ -25,8 +23,18 @@ export default {
                 </li>
               </ul>
               <button class="close-modal"  @click='closeModal'>x</button>
-              <input v-model="userNewTodo" type="text"/>
-              <button class="add-todo" @click='AddTodo'>AddTodo</button>
+
+              <input class="todo-input" v-model="userNewTodo" type="text"/>
+              <div class="btns-todo">
+                <button class="add-todo" @click='AddTodo'>AddTodo</button>
+                
+                <button class="color-pic">
+                  <i class="fa-solid fa-palette"></i>
+                  <input type="color" 
+                  v-model="note.style.backgroundColor"
+                  @input='changeBgcColor'/>
+                </button>
+              </div>
           </article>
   `,
 
@@ -45,7 +53,8 @@ export default {
 
       note.info.todos.splice(todoIdx, 1)
       console.log('note:', note)
-      this.$emit('updateNote', note)
+      // this.$emit('updateNote', note)
+      this.$emit('deleteTodo', todoIdx)
     },
     AddTodo() {
       console.log('addTodo', this.userNewTodo)

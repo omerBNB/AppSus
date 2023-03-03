@@ -10,11 +10,10 @@ export default {
       <section class="main-container"> 
           <section class="side-bar-conatiner"> 
               <ul>
-                  <li>💡 Notes</li>
-                  <li>🔔 Reminders</li>
-                  <li>🖊 Edit Labels</li>
-                  <li>☑ Archive</li>
-                  <li>🚮 Trash</li>
+                  <li><i class="fa-sharp fa-solid fa-file-lines"></i>Text</li>
+                  <li><i class="fa-sharp fa-solid fa-image"></i>Images</li>
+                  <li><i class="fa-sharp fa-solid fa-video"></i>Videos</li>
+                  <li><i class="fa-sharp fa-solid fa-list-ul"></i>Todos</li>
              </ul>
           </section>
 
@@ -24,7 +23,7 @@ export default {
               
                  <form @submit.prevent="filterbytxt" >
                <button><i class="fa-solid fa-magnifying-glass"></i></button>
-                <input type="search" placeholder="Search mail" v-model="filtertxt" />
+                <input type="search" placeholder="Search Note..." v-model="filtertxt" />
                </form>
                 </section>
 
@@ -82,7 +81,10 @@ export default {
     chooseFile() {
       this.$refs.fileInput.click()
     },
-
+    removeTodo(idx) {
+      this.selectedNote.info.todos.splice(idx, 1)
+      this.updateNote(this.selectedNote)
+    },
     handleFileChange(event) {
       console.log('Selected file:', event.target.files[0])
       this.selectedFile = event.target.files[0]
@@ -109,6 +111,8 @@ export default {
 
     addTodo(todo) {
       this.selectedNote.info.todos.push(todo)
+
+      this.updateNote(this.selectedNote)
     },
 
     changeBgcColor(color) {
@@ -235,8 +239,8 @@ export default {
 
     uploadVideo(txt) {
       console.log('txt', txt)
-      youtubeService.getYoutubeTopRes(txt).then((data) => {
-        this.videoUrl = data.items[0].id.videoId
+      youtubeService.getYoutubeTopRes(txt).then((videoId) => {
+        this.videoUrl = videoId
         console.log('this.videoUrl:', this.videoUrl)
         // if (!this.selectedFile) return
         this.note.info.url = this.videoUrl

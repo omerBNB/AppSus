@@ -59,6 +59,18 @@ const starterNotes = [
       ],
     },
   },
+  {
+    id: 'n104',
+    type: 'NoteVideo',
+    isPinned: false,
+    style: {
+      backgroundColor: '#bdc987',
+    },
+    info: {
+      title: 'יובל המבולבל',
+      url: 'mkLSbPWcJlA',
+    },
+  },
 ]
 _createNotes()
 
