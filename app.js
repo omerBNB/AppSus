@@ -11,7 +11,7 @@ const options = {
         <section>
             <AppHeader />
             <RouterView />
-            <AppFooter />
+            <!-- <AppFooter /> -->
             <UserMsg />
         </section>
     `,

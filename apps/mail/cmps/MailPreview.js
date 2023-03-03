@@ -5,7 +5,7 @@ export default {
                     <div class="checkboxes">
                         <input class="selected" type="checkbox" @click="toggleIsSelected" :checked="isSelectedChecked"/>
                         <input class="star" type="checkbox"  @click="toggleisStared" :checked="isStaredChecked"/>
-                        <input class="cloud" type="checkbox"/>
+                        <input class="cloud" type="checkbox" @click="toggleisImportant" :checked="isImportantChecked"/>
                     </div>
 
                     <div class="sender" @click="showDetails(mail.id)">
@@ -46,6 +46,10 @@ export default {
             this.mail.isStared = (this.mail.isStared) ? false : true
             this.$emit('mailStared', this.mail)
         },
+        toggleisImportant(){
+            this.mail.isImportant = (this.mail.isImportant) ? false : true
+            this.$emit('important', this.mail)
+        },
         ReadUnread(mail){
             this.$emit('readnread',mail)
         },
@@ -72,6 +76,9 @@ export default {
         },
         isStaredChecked() {
             return (this.mail.isStared) ? true : false
+        },
+        isImportantChecked(){
+            return (this.mail.isImportant) ? true : false
         }
     }
 }

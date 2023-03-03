@@ -140,8 +140,8 @@ export const Mailservice = {
     getSentMails,
     saveTrashedMail,
     queryTrashedMail,
-    removeTrashedMail
-
+    removeTrashedMail,
+    getImportantMails
 }
 
 function query(filterBy = {}) {
@@ -156,6 +156,18 @@ function query(filterBy = {}) {
                 return onlyUserMails.filter(mail => mail.isStared)
             }
             else {
+                return onlyUserMails
+            }
+        })
+}
+
+function getImportantMails(filterBy = {}) {
+    return storageService.query(MAILS_KEY)
+        .then(Mails => {
+            let onlyUserMails = Mails.filter(mail => mail.from !== 'user@appsus.com')
+            if (filterBy.isImportant) {
+                return onlyUserMails.filter(mail => mail.isImportant)
+            } else {
                 return onlyUserMails
             }
         })

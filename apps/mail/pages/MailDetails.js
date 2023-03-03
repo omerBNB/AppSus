@@ -11,6 +11,7 @@ export default {
         <div class="main-details-content">
             <h3>{{mail.subject}}</h3>
             <h4>{{mail.from}}</h4>
+            <hr/>
             <p>{{mail.body}}</p>
         </div>
     </section>
@@ -34,6 +35,9 @@ export default {
         isStaredChecked() {
             return (this.mail.isStared) ? true : false
         }
+    },
+    created(){
+        this.$router.push('/mail/' + this.mail.id)
     }
 
 }

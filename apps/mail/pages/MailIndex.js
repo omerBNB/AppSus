@@ -18,6 +18,8 @@ export default {
         @createEmail="createAnEmail"
         @showSent="showSentEmails"
         @showTrash="showTrashMails"
+        @showimportant="showOnlyImportant"
+        :readunread="readMails"
         />
         <section class="mails-conatiner">
             <MailsSearchBar 
@@ -45,10 +47,11 @@ export default {
     data() {
         return {
             mails: [],
-            filterBy: { txt: '', isStared: false },
+            filterBy: { txt: '', isStared: false, isImportant: false },
             creation: null,
             details: false,
-            mail: null
+            mail: null,
+            readMails: 0
         }
     },
     created() {
@@ -65,7 +68,7 @@ export default {
             this.filterBy = { txt: '', isStared: false }
             Mailservice.query(this.filterBy)
                 .then(eMails => this.mails = eMails)
-                // this.$route.push('/mail')
+            // this.$route.push('/mail')
         },
         showOnlyStared() {
             this.details = false
@@ -73,6 +76,13 @@ export default {
             this.filterBy.txt = ''
             this.filterBy.isStared = true
             Mailservice.query(this.filterBy)
+                .then(eMails => this.mails = eMails)
+        },
+        showOnlyImportant() {
+            this.details = false
+            this.mail = null
+            this.filterBy.isImportant = true
+            Mailservice.getImportantMails(this.filterBy)
                 .then(eMails => this.mails = eMails)
         },
         closeCreation() {
@@ -86,14 +96,15 @@ export default {
             Mailservice.get(currMailid)
                 .then(mail => this.mail = mail)
                 .then(mail => {
-                    mail.isRead = (mail.isRead)? false : true
+                    mail.isRead = true
                     return mail
                 })
                 .then(mail => Mailservice.save(mail))
-                
+
         },
-        readUnreadEmail(mail){
-            mail.isRead = (mail.isRead)? false : true
+        readUnreadEmail(mail) {
+            mail.isRead = (mail.isRead) ? false : true
+            this.readMails = (mail.isRead) ? -1 : +1
             Mailservice.save(mail)
         },
         sendNewEmail(content) {
@@ -114,9 +125,10 @@ export default {
             const mail = this.mails.find(mail => mail.id === currMailid)
             if (mail.removedAt) {
                 Mailservice.removeTrashedMail(mail.id)
-                .then(() => {
-                    const idx = this.mails.findIndex(mail => mail.id === currMailid)
-                    this.mails.splice(idx, 1)})
+                    .then(() => {
+                        const idx = this.mails.findIndex(mail => mail.id === currMailid)
+                        this.mails.splice(idx, 1)
+                    })
                 showSuccessMsg('trashsed mail removed')
             } else {
                 Mailservice.saveTrashedMail(mail)

@@ -7,7 +7,7 @@ import MailDetails from '../pages/MailDetails.js'
 export default {
     props: ['mails'],
     template: `
-            <section>
+            <!-- <section> -->
                 <ul >
                     <li v-for="mail in mails" :key="mail.id" :class=" mail.isRead? 'read' : 'unread' " v-if="!mail">
                         <MailPreview 
@@ -15,6 +15,7 @@ export default {
                         @showdetails="showDetails"
                         @mailSelected="saveAsSelected"
                         @mailStared="mailStared"
+                        @important="mailImportant"
                         @readnread="toggleReadUnread(mail)"
                         @deletemail="deleteMail(mail.id)"
                         />
@@ -29,7 +30,7 @@ export default {
                     <button hidden @click="showDetails(mail.id)">Details</button>
                     <button @click="remove(mail.id)">x</button> -->
                 </ul>
-            </section>  
+            <!-- </section>   -->
     `,
     data() {
         return {
@@ -53,8 +54,10 @@ export default {
                        
         },
         mailStared(mail){
+            Mailservice.save(mail)                      
+        },
+        mailImportant(mail){
             Mailservice.save(mail)
-                       
         }
     },
     components: {
