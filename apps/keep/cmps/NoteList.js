@@ -9,6 +9,7 @@ export default {
   props: ['notes'],
   template: `
         <section class="notes-container">
+
             <ul v-if="notes">
                 <li v-for="note in notes" :key="note.id">
                 
@@ -21,7 +22,8 @@ export default {
                     :is="note.type"
                     :info="note.info"/>
                     <div>
-                      <button title="delete note" class="remove-note" @click.stop="remove(note.id)">x</button>
+                      <button title="delete note" class="remove-note-preview" @click.stop="remove(note.id)">x</button>
+                      <button title="pin note" class="pin-note-preview" @click.stop="pinNote(note)"><i class="fa-regular fa-star"></i></button>
                    </div>
 
                   </article>
@@ -33,6 +35,10 @@ export default {
   methods: {
     openDetails(note) {
       this.$emit('openDetails', note)
+    },
+
+    pinNote(note) {
+      this.$emit('addPinNote', note)
     },
 
     remove(noteId) {

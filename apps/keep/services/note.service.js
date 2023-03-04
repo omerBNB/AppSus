@@ -22,7 +22,7 @@ const starterNotes = [
     id: 'n101',
     createdAt: 1112222,
     type: 'NoteTxt',
-    isPinned: true,
+    isPinned: false,
     style: {
       backgroundColor: '#B3E5BE',
     },
