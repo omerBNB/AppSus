@@ -4,17 +4,17 @@
 }
 
 .home-page .home-page-img {
-    margin-top: 10%;
+    margin-top: 2.5%;
 }
 
 .home-page-h1 {
-    margin-top: 5%;
+    margin-top: 2.5%;
     font-size: 2em;
     text-align: center;
 }
 
 .about-page {
-    margin-block-start: 20%;
+    margin-block-start: 10%;
     display: grid;
     grid-template-columns: repeat(2,50%);
     text-align: center;
