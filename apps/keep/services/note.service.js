@@ -27,7 +27,7 @@ const starterNotes = [
       backgroundColor: '#B3E5BE',
     },
     info: {
-      txt: 'Fullstack Me Baby!',
+      title: 'Fullstack Me Baby!',
     },
   },
 
@@ -69,6 +69,32 @@ const starterNotes = [
     info: {
       title: 'יובל המבולבל',
       url: 'mkLSbPWcJlA',
+    },
+  },
+
+  {
+    id: 'n105',
+    type: 'NoteVideo',
+    isPinned: false,
+    style: {
+      backgroundColor: '#bdc987',
+    },
+    info: {
+      title: 'dragon ball z',
+      url: 'cmPZzcTeT_0',
+    },
+  },
+  {
+    id: 'n106',
+    type: 'NoteImg',
+    isPinned: false,
+    info: {
+      url: 'https://twpark.com/wp-content/uploads/2022/10/Tanganyika_Alpaca_2021_CS2-683x1024.jpg',
+      title: 'My llama',
+    },
+
+    style: {
+      backgroundColor: '#F5FFC9',
     },
   },
 ]
@@ -122,7 +148,7 @@ function getEmptyTxtNote() {
       backgroundColor: '',
     },
     info: {
-      txt: '',
+      title: '',
     },
   }
 }

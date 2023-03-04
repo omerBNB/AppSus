@@ -5,15 +5,18 @@ import NoteTodosEdit from './NoteEdit/NoteTodosEdit.js'
 export default {
   props: ['selectedNote'],
   template: `
+
   <div class="back-drop">
-<Component
-:is="noteType"
-:note='selectedNote'
-@changeTxt="changeTxt"
-@changeBgcColor="changeBgcColor"
-@addTodo="addTodoToIndex"
-@removeTodo="removeTodo"
->
+    <Component
+    :is="noteType"
+    :note='selectedNote'
+    @changeTxt="changeTxt"
+    @closeModal="closeModal"
+    @changeBgcColor="changeBgcColor"
+    @addTodo="addTodoToIndex"
+    @deleteTodo="removeTodo"
+    >
+   </div>
       `,
 
   computed: {
@@ -41,8 +44,9 @@ export default {
       this.$emit('changeTxt', txt)
     },
     closeModal() {
+      console.log('close')
       this.$emit('closeModal')
-      this.$router.push('/keep')
+      // this.$router.push('/keep')
     },
   },
 

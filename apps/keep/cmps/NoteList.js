@@ -21,9 +21,10 @@ export default {
                     @changeInfo="updateNote" 
                     :is="note.type"
                     :info="note.info"/>
+
                     <div>
-                      <button title="delete note" class="remove-note-preview" @click.stop="remove(note.id)">x</button>
-                      <button title="pin note" class="pin-note-preview" @click.stop="pinNote(note)"><i class="fa-regular fa-star"></i></button>
+                    <button v-if="!note.isPinned" title="delete note" class="remove-note-preview" @click.stop="remove(note.id)">x</button>
+                    <button title="pin note" class="pin-note-preview" @click.stop="togglePin(note)"><i class="fa-regular fa-star"></i></button>
                    </div>
 
                   </article>
@@ -37,12 +38,19 @@ export default {
       this.$emit('openDetails', note)
     },
 
-    pinNote(note) {
-      this.$emit('addPinNote', note)
+    togglePin(note) {
+      console.log('note', note)
+      this.$emit('togglePin', note)
     },
 
     remove(noteId) {
       this.$emit('removeNote', noteId)
+    },
+  },
+
+  computed: {
+    starColor(note) {
+      return note.isPinned ? 'color:yellow' : ''
     },
   },
 

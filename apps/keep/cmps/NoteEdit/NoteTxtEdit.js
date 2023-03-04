@@ -12,8 +12,8 @@ export default {
           <label class="title">
           Click to Edit:
             <input @input="changeTxt"
-            v-model="note.info.txt"
-            type="text" :value="note.info.txt"
+            v-model="note.info.title"
+            type="text" :value="note.info.title"
             :style="{'background-color': note.style.backgroundColor}"
             />
           </label>
@@ -38,8 +38,8 @@ export default {
     },
 
     changeTxt() {
-      console.log('this.note.info.txt', this.note.info.txt)
-      this.$emit('changeTxt', this.note.info.txt)
+      // console.log('this.note.info.title', this.note.info.title)
+      this.$emit('changeTxt', this.note.info.title)
     },
 
     closeModal() {
