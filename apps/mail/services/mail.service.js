@@ -5,6 +5,7 @@ import { storageService } from '../../../services/async-storage.service.js'
 
 const MAILS_KEY = 'Mails'
 const TRASH_MAILS = 'TrashMail'
+const SHRAE_MAIL = 'shareMailDB'
 
 const emails = [{
     id: 'e101',
@@ -122,6 +123,20 @@ const emails = [{
     removedAt: null,
     from: 'mrmeseeks@morty.com',
     to: 'user@appsus.com'
+},
+{
+    id: 'dr110',
+    subject: '',
+    body: '',
+    isRead: false,
+    isSelected: false,
+    isStared: false,
+    isImportant: false,
+    mailIsDraft: true,
+    sentAt: 1551133930594,
+    removedAt: null,
+    from: 'user@appsus.com',
+    to: ''
 }
 ]
 const loggedinUser = {
@@ -142,7 +157,9 @@ export const Mailservice = {
     queryTrashedMail,
     removeTrashedMail,
     getImportantMails,
-    getDraftMail
+    getDraftMail,
+    CreateNoteMail,
+    saveToNotes
 }
 
 function query(filterBy = {}) {
@@ -242,6 +259,13 @@ function save(Mail) {
         return storageService.post(MAILS_KEY, Mail)
     }
 }
+function saveToNotes(Mail) {
+    if (Mail.id) {
+        return storageService.put(SHRAE_MAIL, Mail)
+    } else {
+        return storageService.post(SHRAE_MAIL, Mail)
+    }
+}
 
 function getEmptyMail() {
     return { id: '', title, listPrice }
@@ -255,39 +279,40 @@ function _createMails() {
     }
 }
 
-function createMail(to, subject, body, mailIsDraft) {
-    let Mail
-    if (mailIsDraft) {
-        Mail = {
-            id: 'dr101',
-            subject,
-            body,
-            isRead: false,
-            isSelected: false,
-            isStared: false,
-            isImportant: false,
-            sentAt: Date.now(),
-            removedAt: null,
-            mailIsDraft,
-            from: loggedinUser.email,
-            to,
-        }
-    } else {
-        Mail = {
-            id: null,
-            subject,
-            body,
-            isRead: false,
-            isSelected: false,
-            isStared: false,
-            isImportant: false,
-            sentAt: Date.now(),
-            removedAt: null,
-            mailIsDraft,
-            from: loggedinUser.email,
-            to,
-        }
+
+function CreateNoteMail(title, text) {
+    return {
+        id: null,
+        info: { title, text},
+        isPinned: false,
+        type:'NoteEmail',
+        style:{backgroundColor:'#ECF2FF'},
+        // isSelected: false,
+        // isStared: false,
+        // isImportant: false,
+        // sentAt: Date.now(),
+        // removedAt: null,
+        // from: loggedinUser.email,
+        // to,
     }
+}
+
+function createMail(to, subject, body, mailIsDraft) {
+    const Mail = {
+        id: null,
+        subject,
+        body,
+        isRead: false,
+        isSelected: false,
+        isStared: false,
+        isImportant: false,
+        sentAt: Date.now(),
+        removedAt: null,
+        mailIsDraft,
+        from: loggedinUser.email,
+        to,
+    }
+
     return save(Mail)
 }
 

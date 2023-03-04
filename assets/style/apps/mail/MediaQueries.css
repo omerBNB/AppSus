@@ -149,6 +149,19 @@
         /* border-top-right-radius: 0; */
         background-color: #0b57d0;
     }
+    .createEmail-Container .send-button2 {
+        /* position: fixed; */
+        /* left: 50%; */
+        /* top: 90%; */
+        width: 35%;
+        height: 40px;
+        color: white;
+        margin-block-start: 3%;
+        /* border-bottom-right-radius: 0; */
+        border-top-left-radius: 18px;
+        /* border-top-right-radius: 0; */
+        background-color: #ce7235;
+    }
 
     /* Search Bar */
     .search-container {
@@ -887,6 +900,17 @@
         border-top-left-radius: 18px;
         /* border-top-right-radius: 0; */
         background-color: #0b57d0;
+    }
+    .createEmail-Container .send-button2 {
+        margin-inline-start: 2%;
+        width: 35%;
+        height: 40px;
+        color: white;
+        margin-block-start: 3%;
+        /* border-bottom-right-radius: 0; */
+        border-top-left-radius: 18px;
+        /* border-top-right-radius: 0; */
+        background-color: #ce7235;
     }
     /* Search Bar */
     .search-container {
