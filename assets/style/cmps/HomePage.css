@@ -1,0 +1,28 @@
+.home-page{
+   display: flex;
+   justify-content: center;
+}
+
+.home-page .home-page-img {
+    margin-top: 10%;
+}
+
+.home-page-h1 {
+    margin-top: 5%;
+    font-size: 2em;
+    text-align: center;
+}
+
+.about-page {
+    margin-block-start: 20%;
+    display: grid;
+    grid-template-columns: repeat(2,50%);
+    text-align: center;
+    justify-content: space;
+    gap: 10px;
+}
+
+.about-page img {
+    height: 50%;
+    border-radius: 50%;
+}

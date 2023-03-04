@@ -44,6 +44,7 @@ export default {
   @closeTheCompose="closeCreation"
   @sendEmail="sendNewEmail"
   @sendtonotes="sendEmailToNotes"
+  @savedraftmail="saveDraftMail"
   />
     `,
     data() {
@@ -70,10 +71,24 @@ export default {
             Mailservice.saveToNotes(newNoteMail)    
             this.creation = null    
         },
-        // saveDraftMail(mail){
-        //     Mailservice.save(mail)
-        //     // console.log('mail',mail)
-        // },
+        saveDraftMail(mail){
+            let newmail = {
+                id: 'dr110',
+                subject: mail.subject,
+                body: mail.body,
+                isRead: false,
+                isSelected: false,
+                isStared: false,
+                isImportant: false,
+                mailIsDraft: true,
+                sentAt: 1551133930594,
+                removedAt: null,
+                from: 'user@appsus.com',
+                to: mail.to
+            }
+            Mailservice.saveDraftMail(newmail)
+            // console.log('mail',mail)
+        },
         showAllMails() {
             this.details = false
             this.mail = null
@@ -125,6 +140,7 @@ export default {
             Mailservice.createMail(to, subject, body)
                 .then(() =>
                     showSuccessMsg('mail sent'))
+            Mailservice.removeDraftedMail('dr110')
         },
         showSentEmails() {
             this.details = false
