@@ -62,17 +62,27 @@
 .addnote-container div button {
   width: 30px;
   transition: 0.3s;
-  background-color: rgb(226, 211, 232);
+  background-color: #eaf1fb;
   padding: 5px;
   margin: 5px;
 }
 
 .addnote-container div button:hover {
-  scale: 1.2;
+  scale: 1.02;
+  background-color: #d5dfee;
+}
+.addnote-container div button:last-child {
+  transition: 0.3s;
+  background-color: #cae4ca;
+}
+
+.addnote-container div button:last-child:hover {
+  background-color: #b8d5b8;
 }
 
 /**List */
 .main-container .notes-conatiner ul {
+  /* height: max-content; */
   list-style: none;
   font-size: 1rem;
   padding: 0;
@@ -100,12 +110,22 @@
   width: 80%;
 }
 
+.main-container .notes-conatiner ul .note div button {
+  background-color: transparent;
+  transition: 0.3s;
+}
+
+.main-container .notes-conatiner ul .note div button:hover {
+  scale: 1.15;
+}
+
 .main-container .notes-conatiner ul .note:hover {
   scale: 1.1;
 }
 
 .notes-conatiner ul .note .title {
   margin: 0;
+  margin-bottom: 10px;
   font-size: smaller;
 }
 
@@ -125,4 +145,5 @@
 }
 .note iframe {
   width: 100%;
+  border-radius: 15px;
 }

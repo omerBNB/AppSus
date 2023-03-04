@@ -24,7 +24,7 @@ export default {
                     :info="note.info"/>
 
                     <div>
-                    <button v-if="!note.isPinned" title="delete note" class="remove-note-preview" @click.stop="remove(note.id)">x</button>
+                    <button v-if="!note.isPinned" title="delete note" class="remove-note-preview" @click.stop="remove(note.id)"><i class="fa-solid fa-trash"></i></button>
                     <button title="pin note" class="pin-note-preview" @click.stop="togglePin(note)"><i class="fa-regular fa-star"></i></button>
                    </div>
 

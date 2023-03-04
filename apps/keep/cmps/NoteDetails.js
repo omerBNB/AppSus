@@ -1,6 +1,8 @@
 import NoteTxtEdit from './NoteEdit/NoteTxtEdit.js'
 import NoteImgEdit from './NoteEdit/NoteImgEdit.js'
 import NoteTodosEdit from './NoteEdit/NoteTodosEdit.js'
+import NoteVideoEdit from './NoteEdit/NoteVideoEdit.js'
+import NoteEmailEdit from './NoteEdit/NoteEmailEdit.js'
 
 export default {
   props: ['selectedNote'],
@@ -54,5 +56,7 @@ export default {
     NoteTxtEdit,
     NoteImgEdit,
     NoteTodosEdit,
+    NoteVideoEdit,
+    NoteEmailEdit,
   },
 }

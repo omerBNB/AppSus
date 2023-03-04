@@ -33,12 +33,12 @@ export default {
                       <input v-model="userTxt" class="takeANote" :type="text" :placeholder="currInputPlaceHolder"/>
 
                       <div>
-                        <button type="button" @click="changeInputType('NoteTxt')">A</button>
-                        <button type="button" @click="changeInputType('img')" ><i class="fa-solid fa-image"></i></button>
+                        <button title="write text" type="button" @click="changeInputType('NoteTxt')">A</button>
+                        <button title="Upload Image" type="button" @click="changeInputType('img')" ><i class="fa-solid fa-image"></i></button>
                         <input type="file" ref="fileInput" @change="handleFileChange" style="display: none;">
-                        <button type="button" @click="changeInputType('NoteVideo')" ><i class="fa-brands fa-youtube"></i></i></button>
-                        <button type="button" @click="changeInputType('todoList')" ><i class="fa-solid fa-list"></i></button>
-                        <button type="submit" ><i class="fa-regular fa-plus"></i></button>
+                        <button title="Upload Youtube Video" type="button" @click="changeInputType('NoteVideo')" ><i class="fa-brands fa-youtube"></i></i></button>
+                        <button title="Add Todo List" type="button" @click="changeInputType('todoList')" ><i class="fa-solid fa-list"></i></button>
+                        <button title="Upload Note" type="submit" ><i class="fa-regular fa-plus"></i></button>
                       </div>
 
                       </form>
