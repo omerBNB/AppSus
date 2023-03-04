@@ -67,7 +67,8 @@ export default {
         sendEmailToNotes(mail){
             const {to,subject} = mail
             const newNoteMail = Mailservice.CreateNoteMail(to,subject)
-            Mailservice.saveToNotes(newNoteMail)        
+            Mailservice.saveToNotes(newNoteMail)    
+            this.creation = null    
         },
         // saveDraftMail(mail){
         //     Mailservice.save(mail)
