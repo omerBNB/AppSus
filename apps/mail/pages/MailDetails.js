@@ -36,8 +36,5 @@ export default {
             return (this.mail.isStared) ? true : false
         }
     },
-    created(){
-        this.$router.push('/mail/' + this.mail.id)
-    }
 
 }

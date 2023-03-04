@@ -29,7 +29,7 @@ export default {
      :mails="getFilterByTxt"
      @showTheDetails="showDetails"
      @deletethismail="deleteMail"
-     v-if="details===false"/>
+     v-if="!details"/>
      <MailDetails 
      v-if="mail" 
      :mail="mail"
@@ -139,6 +139,8 @@ export default {
                         showSuccessMsg('mail removed')
                     })
             }
+            this.details = false
+            this.mail = null
         },
         showTrashMails() {
             Mailservice.queryTrashedMail()

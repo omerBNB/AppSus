@@ -8,7 +8,7 @@ export default {
     <h1>AppSus</h1>
             <ul>
                 <button @click="sentCreate"><i class="fa-solid fa-pencil"></i> Compose</button>
-                <li @click="onInbox"><i class="fa-solid fa-inbox"></i> Inbox {{this.contedUnread}}</li>
+                <li class="inbox" @click="onInbox"><i class="fa-solid fa-inbox"></i> Inbox {{this.contedUnread}}</li>
                 <li @click="onlyStared"><i class="fa-regular fa-star"></i> Starred</li>
                 <li><i class="fa-solid fa-clock-rotate-left"></i> Snoozed</li>
                 <li @click="showImportant"><i class="fa-solid fa-cloud"></i> Important</li>
@@ -19,7 +19,8 @@ export default {
     `,
     data(){
         return{
-            contedUnread: 0
+            contedUnread: 0,
+            countedStars:0
         }
     },
     methods:{
