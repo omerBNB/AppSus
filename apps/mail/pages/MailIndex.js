@@ -42,7 +42,8 @@ export default {
   <CreateEmail
   v-if="creation === 'compose'"
   @closeTheCompose="closeCreation"
-  @sendEmail="sendNewEmail"/>
+  @sendEmail="sendNewEmail"
+  @savedraftmail="saveDraftMail"/>
     `,
     data() {
         return {
@@ -61,6 +62,11 @@ export default {
     methods: {
         setFilterBytxt(filterBy) {
             this.filterBy.txt = filterBy
+        },
+        saveDraftMail(mail){
+            const { to, subject, body, mailIsDraft} = mail
+            Mailservice.createMail(to, subject, body, mailIsDraft)
+            // console.log('mail',mail)
         },
         showAllMails() {
             this.details = false
@@ -109,8 +115,8 @@ export default {
         },
         sendNewEmail(content) {
             this.creation = null
-            const { to, subject, body } = content
-            Mailservice.createMail(to, subject, body)
+            const { to, subject, body, mailIsDraft} = content
+            Mailservice.createMail(to, subject, body, mailIsDraft)
                 .then(() =>
                     showSuccessMsg('mail sent'))
         },

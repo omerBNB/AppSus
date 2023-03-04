@@ -141,7 +141,8 @@ export const Mailservice = {
     saveTrashedMail,
     queryTrashedMail,
     removeTrashedMail,
-    getImportantMails
+    getImportantMails,
+    getDraftMail
 }
 
 function query(filterBy = {}) {
@@ -192,7 +193,7 @@ function queryTrashedMail(filterBy = {}) {
 function getSentMails(filterBy = {}) {
     return storageService.query(MAILS_KEY)
         .then(Mails => {
-            let onlySentMails = Mails.filter(mail => mail.from === 'user@appsus.com')
+            let onlySentMails = Mails.filter(mail => mail.from === 'user@appsus.com' && !mail.mailIsDraft)
             if (filterBy.txt) {
                 const regex = new RegExp(filterBy.txt, 'i')
                 return onlySentMails.filter(mail => regex.test(mail.body))
@@ -204,6 +205,12 @@ function getSentMails(filterBy = {}) {
                 return onlySentMails
             }
         })
+}
+
+
+function getDraftMail() {
+    return storageService.query(MAILS_KEY)
+        .then(Mails => Mails.filter(mail => mail.from === 'user@appsus.com' && mail.mailIsDraft))
 }
 
 function get(MailId) {
@@ -248,19 +255,38 @@ function _createMails() {
     }
 }
 
-function createMail(to, subject, body) {
-    const Mail = {
-        id: null,
-        subject,
-        body,
-        isRead: false,
-        isSelected: false,
-        isStared: false,
-        isImportant: false,
-        sentAt: Date.now(),
-        removedAt: null,
-        from: loggedinUser.email,
-        to,
+function createMail(to, subject, body, mailIsDraft) {
+    let Mail
+    if (mailIsDraft) {
+        Mail = {
+            id: 'dr101',
+            subject,
+            body,
+            isRead: false,
+            isSelected: false,
+            isStared: false,
+            isImportant: false,
+            sentAt: Date.now(),
+            removedAt: null,
+            mailIsDraft,
+            from: loggedinUser.email,
+            to,
+        }
+    } else {
+        Mail = {
+            id: null,
+            subject,
+            body,
+            isRead: false,
+            isSelected: false,
+            isStared: false,
+            isImportant: false,
+            sentAt: Date.now(),
+            removedAt: null,
+            mailIsDraft,
+            from: loggedinUser.email,
+            to,
+        }
     }
     return save(Mail)
 }
