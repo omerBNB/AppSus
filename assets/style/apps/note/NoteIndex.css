@@ -91,6 +91,11 @@
   margin: 10px;
 }
 
+.main-container .notes-conatiner ul .note div {
+  margin: auto;
+  width: 80%;
+}
+
 .main-container .notes-conatiner ul .note:hover {
   scale: 1.1;
 }
@@ -107,7 +112,7 @@
 
 .notes-conatiner ul .note img {
   border-radius: 15px;
-  width: 70%;
+  width: 100%;
 }
 
 .note.remove-note {

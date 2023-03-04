@@ -2,7 +2,6 @@ import { noteService } from '../services/note.service.js'
 import { youtubeService } from '../services/youtube.service.js'
 import NoteList from '../cmps/NoteList.js'
 import NoteDetails from '../cmps/NoteDetails.js'
-
 import { showErrorMsg, showSuccessMsg } from '../../../services/event-bus.service.js'
 
 export default {
@@ -24,14 +23,14 @@ export default {
           <section class="notes-conatiner">
               <section class="search-container">
               
-                 <form @submit.prevent="filterbytxt" >
+                 <form>
                <button><i class="fa-solid fa-magnifying-glass"></i></button>
-                <input type="search" placeholder="Search Note..." v-model="filtertxt" />
+                <input type="search" placeholder="Search Note..." v-model="filterName" />
                </form>
                 </section>
 
                     <form class="addnote-container" @submit.prevent="uploadNote">
-                      <input v-model="userTxt" class="takeANote" :type="text" :placeholder="currInputType"/>
+                      <input v-model="userTxt" class="takeANote" :type="text" :placeholder="currInputPlaceHolder"/>
 
                       <div>
                         <button type="button" @click="changeInputType('NoteTxt')">A</button>
@@ -50,6 +49,7 @@ export default {
                         <h1>Pinned Notes:</h1>
                       <NoteList 
                       @removeNote="removeNote"
+                      @togglePin='togglePinNote'
                      @openDetails="openDetails"
                      :notes="pinnedNotes"/> 
                       </section>
@@ -57,14 +57,14 @@ export default {
 
               <NoteList 
               @removeNote="removeNote"
-              @addPinNote='pinNote'
+              @togglePin='togglePinNote'
               @openDetails="openDetails"
               :notes="noteToShow"/> 
   
-               <!-- </section> -->
                </section>
 
                <NoteDetails
+               v-if="selectedNote"
                :selectedNote="selectedNote"
                @updateNote='updateNote'
                @closeModal='selectedNote = null'
@@ -73,7 +73,7 @@ export default {
                @addTodos='addTodo'
                @deleteTodo='removeTodo'
               
-               v-if="selectedNote"/>
+               />
                
      </section> 
      </section> 
@@ -81,6 +81,7 @@ export default {
 
   data() {
     return {
+      filterName: '',
       note: noteService.getEmptyTxtNote(),
       userTxt: '',
       notes: null,
@@ -89,15 +90,33 @@ export default {
       selectedImg: null,
       videoUrl: null,
       filterBy: 'All',
+      currInputPlaceHolder: 'Write text and click on "Upload"...',
       pinnedNotes: [],
     }
   },
 
   methods: {
-    pinNote(note) {
-      note.isPinned = !note.isPinned
-      this.pinnedNotes.push(note)
-      this.updateNote(note)
+    togglePinNote(note) {
+      if (!note.isPinned) {
+        note.isPinned = !note.isPinned
+        this.pinnedNotes.push(note)
+        const idx = this.notes.findIndex((note1) => note1.id === note.id)
+        this.notes.splice(idx, 1)
+      } else {
+        note.isPinned = !note.isPinned
+        const idx = this.pinnedNotes.findIndex((pinnedNote) => pinnedNote.id === note.id)
+        this.pinnedNotes.splice(idx, 1)
+        this.notes.push(note)
+      }
+      //1 noteService
+      //   .save(this.note)
+      //   .then(() => {
+      //     // this.notes.push(this.note)
+      //     showSuccessMsg('Pin Note saved')
+      //   })
+      //   .catch(() => {
+      //     showErrorMsg('Pin Note save failed')
+      //   })
     },
 
     chooseFile() {
@@ -166,15 +185,24 @@ export default {
 
     changeInputType(val) {
       this.currInputType = val
-      if (this.currInputType === 'NoteTxt') this.note = noteService.getEmptyTxtNote()
-      else if (this.currInputType === 'img') {
+      if (this.currInputType === 'NoteTxt') {
+        this.note = noteService.getEmptyTxtNote()
+        this.currInputPlaceHolder = 'Write text and click on "Upload"...'
+      } else if (this.currInputType === 'img') {
         this.note = noteService.getEmptyImgNote()
         this.chooseFile()
-      } else if (this.currInputType === 'todoList') this.note = noteService.getEmptyTodoListNote()
-      else if (this.currInputType === 'NoteVideo') {
+        this.currInputPlaceHolder = 'Uploading image...'
+      } else if (this.currInputType === 'todoList') {
+        this.note = noteService.getEmptyTodoListNote()
+        this.currInputPlaceHolder =
+          'Write a todo list with seperate commas, example: title,todo1,todo2,todo3 ...'
+      } else if (this.currInputType === 'NoteVideo') {
+        this.currInputPlaceHolder = 'Write a video name and "upload" to upload from Youtube'
+        if (this.userTxt === '') return
         this.note = noteService.getEmptyVideoNote()
         this.uploadVideo(this.userTxt)
       }
+      this.userTxt = ''
     },
 
     openDetails(note) {
@@ -240,6 +268,7 @@ export default {
         const imgUrl = this.imageUrl()
         this.addImgNote(this.userTxt, imgUrl, this.selectedImg)
       }
+      this.userTxt = ''
     },
 
     addTxtNote(txt, type) {
@@ -285,8 +314,12 @@ export default {
 
   computed: {
     noteToShow() {
-      if (!this.filterBy) return this.notes
-      if (this.filterBy === 'All') return this.notes.filter((note) => !note.isPinned)
+      const regex = new RegExp(this.filterName, 'i')
+
+      if (this.filterBy === 'All')
+        return this.notes.filter((note) => {
+          return regex.test(note.info.title) && !note.isPinned
+        })
 
       if (this.filterBy === 'NoteTxt') {
         return this.notes.filter((note) => note.type === 'NoteTxt' && !note.isPinned)
@@ -324,23 +357,3 @@ export default {
     NoteDetails,
   },
 }
-
-// function onImgInput(ev) {
-//   loadImageFromInput(ev, renderImg)
-//   // gImgs.push()
-// }
-
-// // CallBack func will run on success load of the img
-// function loadImageFromInput(ev, onImageReady) {
-//   const reader = new FileReader()
-//   // After we read the file
-//   reader.onload = function (event) {
-//     let img = new Image() // Create a new html img element
-//     img.src = event.target.result // Set the img src to the img file we read
-//     // Run the callBack func, To render the img on the canvas
-//     img.onload = onImageReady.bind(null, img)
-//     // Can also do it this way:
-//     // img.onload = () => onImageReady(img)
-//   }
-//   reader.readAsDataURL(ev.target.files[0]) // Read the file we picked
-// }
