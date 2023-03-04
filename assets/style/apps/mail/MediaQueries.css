@@ -150,13 +150,13 @@
         background-color: #0b57d0;
     }
     .createEmail-Container .send-button2 {
-        /* position: fixed; */
-        /* left: 50%; */
-        /* top: 90%; */
+        position: sticky;
+        left: 70%;
+        bottom: 6.3%;
         width: 35%;
         height: 40px;
         color: white;
-        margin-block-start: 3%;
+        /* margin-block-start: 3%; */
         /* border-bottom-right-radius: 0; */
         border-top-left-radius: 18px;
         /* border-top-right-radius: 0; */
@@ -543,6 +543,19 @@
         background-color: #0b57d0;
     }
 
+    .createEmail-Container .send-button2 {
+        position: sticky;
+        left: 83%;
+        bottom: 1.3%;
+        width: 35%;
+        height: 40px;
+        color: white;
+        /* margin-block-start: 3%; */
+        /* border-bottom-right-radius: 0; */
+        border-top-left-radius: 18px;
+        /* border-top-right-radius: 0; */
+        background-color: #ce7235;
+    }
     /* Search Bar */
     .search-container {
         background-color: #F6F8FC;
@@ -902,11 +915,13 @@
         background-color: #0b57d0;
     }
     .createEmail-Container .send-button2 {
-        margin-inline-start: 2%;
+        position: sticky;
+        left: 83%;
+        bottom: 3.7%;
         width: 35%;
         height: 40px;
         color: white;
-        margin-block-start: 3%;
+        /* margin-block-start: 3%; */
         /* border-bottom-right-radius: 0; */
         border-top-left-radius: 18px;
         /* border-top-right-radius: 0; */
