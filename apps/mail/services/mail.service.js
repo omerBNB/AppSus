@@ -6,6 +6,7 @@ import { storageService } from '../../../services/async-storage.service.js'
 const MAILS_KEY = 'Mails'
 const TRASH_MAILS = 'TrashMail'
 const SHRAE_MAIL = 'shareMailDB'
+const DRAFT_MAIL = 'draftMailDB'
 
 const emails = [{
     id: 'e101',
@@ -124,20 +125,6 @@ const emails = [{
     from: 'mrmeseeks@morty.com',
     to: 'user@appsus.com'
 },
-{
-    id: 'dr110',
-    subject: '',
-    body: '',
-    isRead: false,
-    isSelected: false,
-    isStared: false,
-    isImportant: false,
-    mailIsDraft: true,
-    sentAt: 1551133930594,
-    removedAt: null,
-    from: 'user@appsus.com',
-    to: ''
-}
 ]
 const loggedinUser = {
     email: 'user@appsus.com',
@@ -158,8 +145,10 @@ export const Mailservice = {
     removeTrashedMail,
     getImportantMails,
     getDraftMail,
+    saveDraftMail,
     CreateNoteMail,
-    saveToNotes
+    saveToNotes,
+    removeDraftedMail
 }
 
 function query(filterBy = {}) {
@@ -226,8 +215,7 @@ function getSentMails(filterBy = {}) {
 
 
 function getDraftMail() {
-    return storageService.query(MAILS_KEY)
-        .then(Mails => Mails.filter(mail => mail.from === 'user@appsus.com' && mail.mailIsDraft))
+    return storageService.query(DRAFT_MAIL)
 }
 
 function get(MailId) {
@@ -241,6 +229,9 @@ function remove(MailId) {
 
 function removeTrashedMail(MailId) {
     return storageService.remove(TRASH_MAILS, MailId)
+}
+function removeDraftedMail(MailId) {
+    return storageService.remove(DRAFT_MAIL, MailId)
 }
 
 function saveTrashedMail(Mail) {
@@ -264,6 +255,30 @@ function saveToNotes(Mail) {
         return storageService.put(SHRAE_MAIL, Mail)
     } else {
         return storageService.post(SHRAE_MAIL, Mail)
+    }
+}
+function saveDraftMail(Mail){
+    if (Mail.id) {
+        return storageService.put(DRAFT_MAIL, Mail)
+    } else {
+        return storageService.post(DRAFT_MAIL, Mail)
+    }
+}
+
+function createDraftMail(){
+    return {
+        id: 'dr110',
+        subject: '',
+        body: '',
+        isRead: false,
+        isSelected: false,
+        isStared: false,
+        isImportant: false,
+        mailIsDraft: true,
+        sentAt: 1551133930594,
+        removedAt: null,
+        from: 'user@appsus.com',
+        to: ''
     }
 }
 
