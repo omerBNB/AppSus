@@ -2,11 +2,8 @@ export default {
   props: ['info'],
   template: `
     <div>
-        <pre>
-            {{info}}
-        </pre>
-      <!-- <h2 class="title">{{info.title}}</h2> -->
-      
+        <h2 class="title">{{info.title}}</h2>
+        <h2 class="txt">{{info.text}}</h2>
   </div>
   
           `,

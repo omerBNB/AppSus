@@ -104,12 +104,16 @@ _createNotes()
 function query() {
   return storageService.query(NOTES_KEY).then((notes) => {
     const mailsShare = utilService.loadFromStorage(SHARE_MAIL)
-    if (mailsShare)
+    console.log('mailsShare:', mailsShare)
+
+    if (mailsShare) {
       mailsShare.forEach((mail) => {
-        console.log('sharing mails')
+        mail.id = null
         notes.push(mail)
+        save(mail)
       })
-    console.log('notes:', notes)
+      localStorage.removeItem(SHARE_MAIL)
+    }
 
     return notes
   })
