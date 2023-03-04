@@ -54,7 +54,7 @@ export default {
                      :notes="pinnedNotes"/> 
                       </section>
 
-
+                      <h1 class="sub-title">Other Notes:</h1>
               <NoteList 
               @removeNote="removeNote"
               @togglePin='togglePinNote'
@@ -272,7 +272,7 @@ export default {
     },
 
     addTxtNote(txt, type) {
-      this.note.info.txt = txt
+      this.note.info.title = txt
       this.note.type = type
       this.note.style.backgroundColor = '#B3E5BE'
       noteService

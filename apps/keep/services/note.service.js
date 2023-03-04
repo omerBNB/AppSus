@@ -4,6 +4,7 @@ import { utilService } from '../../../services/util.service.js'
 import { storageService } from '../../../services/async-storage.service.js'
 
 const NOTES_KEY = 'notesDB'
+const SHARE_MAIL = 'shareMailDB'
 
 export const noteService = {
   query,
@@ -102,20 +103,20 @@ _createNotes()
 
 function query() {
   return storageService.query(NOTES_KEY).then((notes) => {
-    //     if (filterBy.txt) {
-    //       const regex = new RegExp(filterBy.txt, 'i')
-    //       cars = cars.filter((car) => regex.test(car.vendor))
-    //     }
-    //     if (filterBy.minSpeed) {
-    //       cars = cars.filter((car) => car.maxSpeed >= filterBy.minSpeed)
-    //     }
+    const mailsShare = utilService.loadFromStorage(SHARE_MAIL)
+    if (mailsShare)
+      mailsShare.forEach((mail) => {
+        console.log('sharing mails')
+        notes.push(mail)
+      })
+    console.log('notes:', notes)
+
     return notes
   })
 }
 
 function get(noteId) {
   return storageService.get(NOTES_KEY, noteId)
-  // .then(_setNextPrevNoteId)
 }
 
 function remove(noteId) {

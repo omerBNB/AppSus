@@ -1,24 +1,28 @@
 .pin-notes-container {
-  border: 1px solid rgb(124, 121, 121);
+  padding: 5px;
+  border: 1px solid rgb(220, 215, 215);
   border-radius: 15px;
-  background-color: rgb(233, 255, 248);
+  background-color: rgb(250, 255, 253);
 }
 
 .pin-notes-container h1 {
-  text-align: center;
   font-size: 1em;
 }
-
 /** notes-container */
 
 .main-container .notes-conatiner {
-  background: linear-gradient(331deg, rgba(253, 253, 253, 1) 36%, rgb(220, 250, 204) 74%);
+  /* background: linear-gradient(331deg, rgba(253, 253, 253, 1) 36%, rgb(220, 250, 204) 74%); */
   width: 85%;
   /* border-radius: 15px; */
-  border-left: 1px solid rgb(130, 119, 119);
-  border-top: 1px solid rgb(185, 173, 173);
+  /* border-left: 1px solid rgb(195, 195, 195); */
+  /* border-top: 1px solid rgb(225, 225, 225); */
   border-radius: 10px;
   padding: 7px;
+}
+
+.main-container .notes-conatiner .sub-title {
+  font-size: 1em;
+  width: 85%;
 }
 
 .main-container input {
@@ -28,7 +32,7 @@
 
 /** addnote-container */
 .addnote-container {
-  margin: 10px;
+  margin: 0px;
   display: flex;
   padding: 3px;
   border-radius: 10px;

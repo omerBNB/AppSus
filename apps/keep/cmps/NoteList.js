@@ -4,6 +4,7 @@ import NoteTxt from './NoteTxt.js'
 import NoteImg from './NoteImg.js'
 import NoteTodos from './NoteTodos.js'
 import NoteVideo from './NoteVideo.js'
+import NoteEmail from './NoteEmail.js'
 
 export default {
   props: ['notes'],
@@ -37,7 +38,7 @@ export default {
     openDetails(note) {
       this.$emit('openDetails', note)
     },
-
+    //
     togglePin(note) {
       console.log('note', note)
       this.$emit('togglePin', note)
@@ -59,5 +60,6 @@ export default {
     NoteImg,
     NoteTodos,
     NoteVideo,
+    NoteEmail,
   },
 }
