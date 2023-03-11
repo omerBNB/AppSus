@@ -138,25 +138,37 @@
         border: none;
     }
 
-    .createEmail-Container .send-button {
+    .createEmail-Container .send-btns{
+        display: flex;
+        padding: 15px;
+        justify-content: space-between;
+       
+    }
+    .createEmail-Container .send-btns button{
+        background-color: #0b57d0;
+        color: white;
+        height: 40px;
+        width: 20%;
+        font-size: .7em;
+    }
+
+    /* .createEmail-Container .send-button {
         margin-inline-start: 2%;
         width: 25%;
         height: 40px;
         color: white;
         margin-block-start: 3%;
-        /* border-bottom-right-radius: 0; */
+        border-bottom-right-radius: 0;
         border-top-left-radius: 18px;
-        /* border-top-right-radius: 0; */
+        border-top-right-radius: 0;
         background-color: #0b57d0;
-    }
+    } */
     .createEmail-Container .send-button2 {
-        position: fixed;
-        left: 68%;
-        bottom: 6.2%;
-        width: 32%;
+        margin-inline-start: 2%;
+        width: 25%;
         height: 40px;
         color: white;
-        /* margin-block-start: 3%; */
+        margin-block-start: 3%;
         /* border-bottom-right-radius: 0; */
         border-top-left-radius: 18px;
         /* border-top-right-radius: 0; */
@@ -532,30 +544,23 @@
         border: none;
     }
 
-    .createEmail-Container .send-button {
-        margin-inline-start: 2%;
-        width: 18%;
-        height: 38px;
-        color: white;
-        /* border-bottom-right-radius: 0; */
-        border-top-left-radius: 18px;
-        /* border-top-right-radius: 0; */
-        background-color: #0b57d0;
+    .createEmail-Container .send-btns{
+        display: flex;
     }
 
-    .createEmail-Container .send-button2 {
+    /* .createEmail-Container .send-button2 {
         position: fixed;
         left: 83%;
         bottom: 1.1%;
         width: 14%;
         height: 40px;
         color: white;
-        /* margin-block-start: 3%; */
-        /* border-bottom-right-radius: 0; */
+        margin-block-start: 3%;
+        border-bottom-right-radius: 0;
         border-top-left-radius: 18px;
-        /* border-top-right-radius: 0; */
+        border-top-right-radius: 0;
         background-color: #ce7235;
-    }
+    } */
     /* Search Bar */
     .search-container {
         background-color: #F6F8FC;
@@ -904,29 +909,29 @@
         height: 45vh;
         border: none;
     }
-    .createEmail-Container .send-button{
-        margin-inline-start: 2%;
+    .createEmail-Container .send-btns{
+        display: flex;
+
+        /* margin-inline-start: 2%;
         width: 18%;
         height: 38px;
-        color: white;
+        color: white; */
         /* border-bottom-right-radius: 0; */
-        border-top-left-radius: 18px;
+        /* border-top-left-radius: 18px; */
         /* border-top-right-radius: 0; */
-        background-color: #0b57d0;
+        /* background-color: #0b57d0; */
     }
-    .createEmail-Container .send-button2 {
-        position: fixed;
-        left: 87%;
-        bottom: 3.1%;
-        width: 10%;
+    /* .createEmail-Container .send-button2 {
+        margin-inline-start: 2%;
+        width: 12%;
         height: 40px;
         color: white;
-        /* margin-block-start: 3%; */
-        /* border-bottom-right-radius: 0; */
+        margin-block-start: 3%;
+        border-bottom-right-radius: 0;
         border-top-left-radius: 18px;
-        /* border-top-right-radius: 0; */
+        border-top-right-radius: 0;
         background-color: #ce7235;
-    }
+    } */
     /* Search Bar */
     .search-container {
         background-color: #F6F8FC;

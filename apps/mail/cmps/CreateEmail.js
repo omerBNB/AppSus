@@ -18,9 +18,11 @@ export default {
             <!-- <input type="text" v-model="newEmail.body"/> -->
             <textarea type="text" v-model="newEmail.body" ></textarea>
         </div>
-        <button class="send-button">Send</button>
+        <div class="send-btns">
+            <button >Send</button>
+            <button @click.stop="sendEmailToNotes">Save As Keep</button>
+        </div>
     </form>
-    <button @click="sendEmailToNotes" class="send-button2">Save As Keep</button>
     </section>
     `,
     data() {

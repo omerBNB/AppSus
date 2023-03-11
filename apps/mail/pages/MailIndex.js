@@ -65,13 +65,13 @@ export default {
         setFilterBytxt(filterBy) {
             this.filterBy.txt = filterBy
         },
-        sendEmailToNotes(mail){
-            const {to,subject} = mail
-            const newNoteMail = Mailservice.CreateNoteMail(to,subject)
-            Mailservice.saveToNotes(newNoteMail)    
-            this.creation = null    
+        sendEmailToNotes(mail) {
+            const { to, subject } = mail
+            const newNoteMail = Mailservice.CreateNoteMail(to, subject)
+            Mailservice.saveToNotes(newNoteMail)
+            this.creation = null
         },
-        saveDraftMail(mail){
+        saveDraftMail(mail) {
             let newmail = {
                 id: 'dr110',
                 subject: mail.subject,
@@ -136,7 +136,7 @@ export default {
         },
         sendNewEmail(content) {
             this.creation = null
-            const {to, subject, body} = content
+            const { to, subject, body } = content
             Mailservice.createMail(to, subject, body)
                 .then(() =>
                     showSuccessMsg('mail sent'))
@@ -151,6 +151,7 @@ export default {
         },
         deleteMail(currMailid) {
             const mail = this.mails.find(mail => mail.id === currMailid)
+            console.log('mail', mail)
             if (mail.removedAt) {
                 Mailservice.removeTrashedMail(mail.id)
                     .then(() => {
@@ -159,13 +160,14 @@ export default {
                     })
                 showSuccessMsg('trashsed mail removed')
             } else {
-                Mailservice.saveTrashedMail(mail)
                 Mailservice.remove(currMailid)
                     .then(() => {
                         const idx = this.mails.findIndex(mail => mail.id === currMailid)
                         this.mails.splice(idx, 1)
                         showSuccessMsg('mail removed')
                     })
+                    .then(() => Mailservice.saveTrashedMail(mail))
+                // Mailservice.saveTrashedMail(mail)
             }
             this.details = false
             this.mail = null
